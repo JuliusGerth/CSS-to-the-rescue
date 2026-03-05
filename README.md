@@ -40,6 +40,21 @@ Verschillende manieren hoe je 3D kapot kan maken. En hoe je animation-delay kan 
 morgen ga ik mijn control panel uitplannen hoe ik hem wil opzetten en begin maken met de hud
 
 
+## 05/03/2026
+
+### wat heb ik vandaag gedaan en hoelang duurde het?
+
+vandaag ben ik opnieuw begonnen met een idee ik ga nu namelijk een f16 cockpit namaken vandaag ben ik bezig geweest met code opzetten en onderzoek naar hoe ik de cockpit wil gaan opdelen in gedeeltes. Toen dit gedaan was ben ik begonnen met de hud maken daar heb ik nu de housing voor opgezet.
+
+### wat heb ik geleerd?
+
+dat classes een blessing zijn en hoe je een beter logica kan maken zodat je css beter is zodat je niet de zelfde code weer herschrijft en code gewoon kan herbruiken
+
+
+### wat ga ik morgen doen?
+
+voortgangs gesrpekken houden en daarna nog de 1e paar buttons toevoegen aan de cockpit.
+
 ## bronnen 
 
 background image
