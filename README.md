@@ -38,3 +38,10 @@ Verschillende manieren hoe je 3D kapot kan maken. En hoe je animation-delay kan 
 ### wat ga ik morgen doen?
 
 morgen ga ik mijn control panel uitplannen hoe ik hem wil opzetten en begin maken met de hud
+
+
+## bronnen 
+
+background image
+
+https://flyawaysimulation.com/downloads/files/2589/fsx-lockheed-martin-f-16-complete-package/
