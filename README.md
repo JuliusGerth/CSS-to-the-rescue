@@ -20,3 +20,21 @@ en dat containers ook handig zijn voor responsive alleen binnen een element.
 ### wat ga ik morgen doen?
 
 voortgangs gesprekken houden van bt en css en dan begin maken van website voor de weekly nerd
+
+
+
+## 04/03/2026 
+
+### wat heb ik vandaag gedaan en hoelang duurde het?
+
+Vandaag ben ik bezig geweest met de rubrics cube dit wilde alleen niet werken en na een dag er aan te lopen struggelen heb ik toch besloten om een control panel te maken in de vorm van een f16 cockpit.
+
+### wat heb ik geleerd?
+
+Verschillende manieren hoe je 3D kapot kan maken. En hoe je animation-delay kan gebruiken
+
+
+
+### wat ga ik morgen doen?
+
+morgen ga ik mijn control panel uitplannen hoe ik hem wil opzetten en begin maken met de hud
