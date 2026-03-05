@@ -40,7 +40,7 @@ Verschillende manieren hoe je 3D kapot kan maken. En hoe je animation-delay kan 
 morgen ga ik mijn control panel uitplannen hoe ik hem wil opzetten en begin maken met de hud
 
 
-## 05/03/2026
+## 05/03/2026 thomas
 
 ### wat heb ik vandaag gedaan en hoelang duurde het?
 
