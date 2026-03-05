@@ -1,53 +1,119 @@
+*{
+    padding: 0;
+    margin: 0;
+}
 
-body{
+
+
+/* achtergrond image verwijder wnr klaar bent */
+body {
+  background-image: url(images/backgroundimgf16.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+
+  font-family: 'Courier New', monospace;
+}
+
+    /* section{
+    width: 100vw;
+    } */
+
+/* -------------------------------------------------
+--------------behuizing styling voor visor----------
+-------------------------------------------------------*/
+
+div:first-of-type{
+    position: relative;
+    height: 52vh;
+
+}
+/* --------
+als test van logica omdat de 2 buitenste spans het zelfde zijn hoef ik niet 2 keer de zelfde styling toe te voegen en kan het algemen binnen 1 element doen
+en dan alleen de transform rotate
+--------*/
+/* section > div:nth-of-type(1) {
+  position: relative;
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+section > div:nth-of-type(1) > span:nth-child(1) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5vw;
+  background: grey;
+  transform: rotate(-5deg);
+}
+
+section > div:nth-of-type(1) > span:nth-child(2) {
+  position: absolute;
+  left: 95%;
+  top: 0;
+  bottom: 0;
+  width: 4vw;
+  background: grey;
+  transform: rotate(5deg);
+} */
+
+
+
+ section > div:nth-of-type(1) > span:nth-child(1), section > div:nth-of-type(1) > span:nth-child(2) {
+  position: absolute;
+  top: 0;
+  width: 1.5rem;
+  height:100%;
+  background: grey;
+}
+
+section > div:nth-of-type(1) > span:nth-child(1) {
+  left: 0;
+  transform: rotate(-5deg);
+}
+
+section > div:nth-of-type(1) > span:nth-child(2) {
+  left: 95%;
+  transform: rotate(5deg);
+}
+
+section > div:nth-of-type(1) > span:nth-child(3) {
+  position: absolute;
+  left: 5%;
+  bottom: 0;
+  width: 90vw;
+  height: 5vh;
+  background: grey;
+}
+
+/* -------------------------------------------------
+--------------styling voor de buttonbox----------
+-------------------------------------------------------*/
+
+section > div:nth-of-type(2){
     display: grid;
-    place-items: center;
-    gap: 10rem;
-    perspective: 800px;
-    section {
-        display: grid;
-        aspect-ratio: 1;
-        width: 10rem;
-        transform-style: preserve-3d;
-        animation: rotate 10s infinite linear;
-
-    }
+    height: 60vh;
+    width: 100vw;
 }
 
 
-side {
-    display: block;
-    aspect-ratio: 1;
-    grid-row: 1;
-    grid-column: 1;
-    background-color: red;
-    /* opacity: 0.6; */
-    /* filter: contrast(calc(sibling-index() * 20%)); */
-    &:nth-child(1){
-        transform: rotateX(-90deg) translateZ(5rem);
-    }
-    &:nth-child(2){
-        transform: rotateX(90deg) translateZ(5rem);
-    }
-    &:nth-child(3){
-        transform: rotateY(-90deg) translateZ(5rem);
-    }
-    &:nth-child(4){
-        transform: rotateY(90deg) translateZ(5rem);
-    }
-    &:nth-child(5){
-        transform: rotateZ(90deg) translateZ(5rem);
-        background-color: blue;
-    }
-    &:nth-child(6){
-        transform: rotateZ(-90deg) translateZ(-5rem);
-        background-color: green;
-    }
-}
-
-
-@keyframes rotate{
-    to {transform: rotatey(360deg);}
+section > div:nth-of-type(2) > section {
+  position: relative;
+  width: 90vw;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3a3a3a;
+  opacity: 50%;
+  margin-left: 10%;
 }
 
 
