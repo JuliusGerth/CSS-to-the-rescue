@@ -1,120 +1,108 @@
 *{
-    padding: 0;
-    margin: 0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
+/* -----------------------------------
+--------------Body layout-------------
+-------------------------------------- */
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
 
-
-/* achtergrond image verwijder wnr klaar bent */
-body {
-  background-image: url(images/backgroundimgf16.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 100vh;
-
-  font-family: 'Courier New', monospace;
+  background: skyblue;
+  perspective:900px;
+  overflow: hidden;
 }
 
-    /* section{
-    width: 100vw;
-    } */
+/* -----------------------------------
+--------------Behuizing (housing)-----
+-------------------------------------- */
+body > div:first-of-type{
+  width:290px;
+  height:220px;
+  margin-top:25px;
 
-/* -------------------------------------------------
---------------behuizing styling voor visor----------
--------------------------------------------------------*/
+  transform:rotateX(-35deg);
+  transform-style:preserve-3d;
 
-div:first-of-type{
-    position: relative;
-    height: 52vh;
-
-}
-/* --------
-als test van logica omdat de 2 buitenste spans het zelfde zijn hoef ik niet 2 keer de zelfde styling toe te voegen en kan het algemen binnen 1 element doen
-en dan alleen de transform rotate
---------*/
-/* section > div:nth-of-type(1) {
-  position: relative;
-  width: 100vw;
-  height: 50vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
+  clip-path:polygon(
+    0% 0%, 92% 0%, 100% 20%, 100% 90%,
+    92% 100%, 8% 100%, 0% 90%, 0% 20%
+  );
 }
 
-section > div:nth-of-type(1) > span:nth-child(1) {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 5vw;
-  background: grey;
-  transform: rotate(-5deg);
-}
-
-section > div:nth-of-type(1) > span:nth-child(2) {
-  position: absolute;
-  left: 95%;
-  top: 0;
-  bottom: 0;
-  width: 4vw;
-  background: grey;
-  transform: rotate(5deg);
-} */
-
-
-
- section > div:nth-of-type(1) > span:nth-child(1), section > div:nth-of-type(1) > span:nth-child(2) {
-  position: absolute;
-  top: 0;
-  width: 1.5rem;
+/* Inner housing panel */
+body > div:first-of-type > div{
+  width:100%;
   height:100%;
-  background: grey;
+  background:transparent;
+  border-top:14px solid #6b6b6b;
+  border-left:10px solid #0b0b0b;
+  border-right:10px solid #0b0b0b;
+  border-bottom:18px solid #050505;
+  border-radius:120px 120px 20px 20px / 50px 50px 30px 30px;
+  transform-style:preserve-3d;
 }
 
-section > div:nth-of-type(1) > span:nth-child(1) {
-  left: 0;
-  transform: rotate(-5deg);
+/* -----------------------------------
+--------------Button box (panel)------
+-------------------------------------- */
+body > div:nth-of-type(2){
+  width:320px;
+  background:#2f2f2f;
+  border:1px solid #1f1f1f;
+  padding: 1rem;
+  display:grid;
+  margin-top:-11px;
+  border-radius: 5%;
+  gap: 2rem;
 }
 
-section > div:nth-of-type(1) > span:nth-child(2) {
-  left: 95%;
-  transform: rotate(5deg);
+/* -----------------------------------
+--------------Circle buttons----------
+-------------------------------------- */
+/* Buttons container in panel */
+body > div:nth-of-type(2) > div:first-of-type{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap: 0.5rem;
+  max-width:320px;
+  width:100%;
 }
 
-section > div:nth-of-type(1) > span:nth-child(3) {
-  position: absolute;
-  left: 5%;
-  bottom: 0;
-  width: 90vw;
-  height: 5vh;
-  background: grey;
+/* Individual buttons */
+body > div:nth-of-type(2) > div:first-of-type > button{
+  width:2.5rem;
+  aspect-ratio:1;
+  border-radius:50%;
+  border:1px solid #555;
+  background:#8a8a8a;
+  color:#111;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+
 }
 
-/* -------------------------------------------------
---------------styling voor de buttonbox----------
--------------------------------------------------------*/
+body > div:nth-of-type(2) > div:nth-of-type(2){
+  display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1rem;
+justify-items: center;
 
-section > div:nth-of-type(2){
-    display: grid;
-    height: 60vh;
-    width: 100vw;
+button{
+  background:#f00000;
+  width: 3rem;
+  height: 3rem;
 }
-
-
-section > div:nth-of-type(2) > section {
-  position: relative;
-  width: 90vw;
-  height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #3a3a3a;
-  opacity: 50%;
-  margin-left: 10%;
 }
-
 
 
