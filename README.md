@@ -56,6 +56,25 @@ dat classes een blessing zijn en hoe je een beter logica kan maken zodat je css 
 voortgangs gesrpekken houden en daarna nog de 1e paar buttons toevoegen aan de cockpit.
 
 
+## 12/03/2026(Dylan)
+
+### wat heb ik vandaag gedaan en hoelang duurde het?
+
+vandaag ben ik vooral de hle dag bezig geweest met het maken van een flip switch en dat het een beetje lijkt op 3D
+
+### wat heb ik geleerd?
+
+hoe je mask kan maken en hoe je 3D kan faken
+
+### wat ga ik morgen doen?
+
+flip switch afmaken
+
+
+
+
+
+
 
 ## 13/03/2026 feedback sessie met Sanne. 
 feedback sessie met Sanne. 
