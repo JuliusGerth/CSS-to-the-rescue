@@ -55,6 +55,15 @@ dat classes een blessing zijn en hoe je een beter logica kan maken zodat je css 
 
 voortgangs gesrpekken houden en daarna nog de 1e paar buttons toevoegen aan de cockpit.
 
+
+
+## 13/03/2026 feedback sessie met Sanne. 
+feedback sessie met Sanne. 
+Uit het feedback sessie kwam dat er nog veel te doen is in de korte tijd die ik nog heb. Ik moet ervoor zorgen dat ik de pixels omzet in iets dat meer responsive is. En kijken of ik de 3D cube kan gebruiken voor dit project als een flick switch. Kies een thema uit dat erbij past. En verzin nog een titel die erbij past.
+
+
+
+
 ## bronnen 
 
 background image

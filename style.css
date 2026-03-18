@@ -1,108 +1,477 @@
+/* MARK: RESET */
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-/* -----------------------------------
---------------Body layout-------------
--------------------------------------- */
+:root{
+  --color-page-bg: skyblue;
+
+  --color-housing-top: #6b6b6b;
+  --color-housing-algemeen: #050505;
+
+  --color-screen: #74ffb1;
+  --color-screen-glow: #74ffb166;
+
+  --color-button-box-bg: #262626;
+
+  --color-top-button-bg: #8a8a8a;
+  --color-top-button-text: #111;
+
+  --color-keypad-button-bg: #6f6f6f;
+
+  --color-switch-bg: #7e7c7a;
+  --color-switch-stick-bg: #888;
+}
+
+/* MARK: LAYOUT */
 body{
   min-height:100vh;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:flex-start;
-
-  background: skyblue;
+  background: var(--color-page-bg);
   perspective:900px;
   overflow: hidden;
 }
 
-/* -----------------------------------
---------------Behuizing (housing)-----
--------------------------------------- */
+/* MARK: BEHUIZING BUITENKANT */
 body > div:first-of-type{
-  width:290px;
-  height:220px;
-  margin-top:25px;
-
+  width:240px;
+  height:240px;
+  margin-top:16px;
+  transform-origin:center bottom;
   transform:rotateX(-35deg);
   transform-style:preserve-3d;
-
-  clip-path:polygon(
-    0% 0%, 92% 0%, 100% 20%, 100% 90%,
-    92% 100%, 8% 100%, 0% 90%, 0% 20%
-  );
+clip-path: polygon(
+  0% 0%,
+  92% 0%,
+  100% 20%,
+  100% 90%,
+  92% 100%,
+  8% 100%,
+  0% 90%,
+  0% 20%
+);
 }
 
-/* Inner housing panel */
+
+
+/* MARK: BEHUIZING BINNENKANT */
 body > div:first-of-type > div{
   width:100%;
   height:100%;
+  position:relative;
+  overflow:hidden;
   background:transparent;
-  border-top:14px solid #6b6b6b;
-  border-left:10px solid #0b0b0b;
-  border-right:10px solid #0b0b0b;
-  border-bottom:18px solid #050505;
+  border-top:14px solid var(--color-housing-top);
+  border-left:10px solid var(--color-housing-algemeen);
+  border-right:10px solid var(--color-housing-algemeen);
+  border-bottom:18px solid var(--color-housing-algemeen);
   border-radius:120px 120px 20px 20px / 50px 50px 30px 30px;
   transform-style:preserve-3d;
 }
 
-/* -----------------------------------
---------------Button box (panel)------
--------------------------------------- */
+/* MARK: INHOUD BEHUIZING */
+body > div:first-of-type > div > div{
+  position:absolute;
+  inset:16% 10% 14%;
+  color:var(--color-screen);
+  text-shadow:0 0 4px var(--color-screen), 0 0 12px var(--color-screen-glow);
+  pointer-events:none;
+
+  > span{
+    position:absolute;
+    opacity:0.95;
+
+    &:nth-of-type(1){
+      width:2px;
+      height:70%;
+      background:var(--color-screen);
+      left:26%;
+      top:22%;
+      transform:rotate(11deg);
+    }
+
+    &:nth-of-type(2){
+      width:2px;
+      height:84%;
+      background:var(--color-screen);
+      left:45%;
+      top:5%;
+    }
+
+    &:nth-of-type(3){
+      width:2px;
+      height:68%;
+      background:var(--color-screen);
+      left:66%;
+      top:20%;
+      transform:rotate(-12deg);
+    }
+
+    &:nth-of-type(4){
+      width:72%;
+      height:42%;
+      left:14%;
+      top:33%;
+      border-radius:0 0 180px 180px;
+    }
+
+    &:nth-of-type(5),
+    &:nth-of-type(6),
+    &:nth-of-type(7){
+      font-family:Arial, Helvetica, sans-serif;
+      font-size:0.75rem;
+      letter-spacing:0.08em;
+    }
+
+    &:nth-of-type(5){
+      left:8%;
+      top:36%;
+    }
+
+    &:nth-of-type(6){
+      left:52%;
+      top:45%;
+    }
+
+    &:nth-of-type(7){
+      right:8%;
+      bottom:20%;
+    }
+  }
+
+  > div{
+    position:absolute;
+    right:2%;
+    top:9%;
+    width:28%;
+    height:78%;
+
+    > span{
+      position:absolute;
+      opacity:0.95;
+      font-family:Arial, Helvetica, sans-serif;
+      letter-spacing:0.08em;
+
+      &:nth-of-type(1){
+        top:0;
+        right:4%;
+        font-size:0.82rem;
+      }
+
+      &:nth-of-type(2){
+        top:1.3rem;
+        right:8%;
+        width:42%;
+        height:2px;
+        background:var(--color-screen);
+      }
+
+      &:nth-of-type(3){
+        top:1.3rem;
+        right:8%;
+        width:2px;
+        height:56%;
+        background:var(--color-screen);
+      }
+
+      &:nth-of-type(4),
+      &:nth-of-type(5),
+      &:nth-of-type(6){
+        right:8%;
+        height:2px;
+        background:var(--color-screen);
+        transform-origin:right center;
+      }
+
+      &:nth-of-type(4){
+        top:24%;
+        width:44%;
+        transform:rotate(-11deg);
+      }
+
+      &:nth-of-type(5){
+        top:38%;
+        width:35%;
+        transform:rotate(-9deg);
+      }
+
+      &:nth-of-type(6){
+        top:51%;
+        width:28%;
+        transform:rotate(-6deg);
+      }
+
+      &:nth-of-type(7),
+      &:nth-of-type(8),
+      &:nth-of-type(9){
+        right:49%;
+        font-size:0.6rem;
+      }
+
+      &:nth-of-type(7){
+        top:18%;
+      }
+
+      &:nth-of-type(8){
+        top:33%;
+      }
+
+      &:nth-of-type(9){
+        top:46%;
+      }
+
+      &:nth-of-type(10){
+        right:0;
+        bottom:7%;
+        width:62%;
+        height:18%;
+        clip-path:polygon(0 0, 84% 0, 100% 18%, 100% 100%, 18% 100%, 0 82%);
+
+        &::before,
+        &::after{
+          content:'';
+          position:absolute;
+          background:var(--color-screen);
+        }
+
+        &::before{
+          left:-18%;
+          top:48%;
+          width:18%;
+          height:2px;
+        }
+
+        &::after{
+          left:18%;
+          bottom:-18%;
+          width:2px;
+          height:18%;
+        }
+      }
+    }
+  }
+}
+
+/* MARK: BUTTON BOX */
 body > div:nth-of-type(2){
-  width:320px;
-  background:#2f2f2f;
-  border:1px solid #1f1f1f;
+  width:100%;
+  flex:1;
+  background-color:var(--color-button-box-bg);
   padding: 1rem;
   display:grid;
-  margin-top:-11px;
-  border-radius: 5%;
+  align-content:start;
   gap: 2rem;
 }
 
-/* -----------------------------------
---------------Circle buttons----------
--------------------------------------- */
-/* Buttons container in panel */
+/*  RONDE BUTTONS */
 body > div:nth-of-type(2) > div:first-of-type{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
   gap: 0.5rem;
-  max-width:320px;
+  max-width:100%;
   width:100%;
 }
 
-/* Individual buttons */
 body > div:nth-of-type(2) > div:first-of-type > button{
   width:2.5rem;
   aspect-ratio:1;
   border-radius:50%;
-  border:1px solid #555;
-  background:#8a8a8a;
-  color:#111;
+  background:var(--color-top-button-bg);
+  color:var(--color-top-button-text);
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-
-
 }
 
+/*  9 BUTTONS */
 body > div:nth-of-type(2) > div:nth-of-type(2){
   display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 1rem;
-justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  width: fit-content;
+  margin-inline: auto;
 
-button{
-  background:#f00000;
-  width: 3rem;
-  height: 3rem;
-}
+  button{
+    background:var(--color-keypad-button-bg);
+    width: 3.6rem;
+    height: 3.6rem;
+  }
 }
 
+/* MARK: SWITCH */
+input[type="checkbox"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+body > div:nth-of-type(2) > div:nth-of-type(3) {
+  display: flex;
+  justify-content: center;
+}
+
+label {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: var(--color-switch-bg);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  perspective: 80px;
+  transform-style: preserve-3d;
+
+}
+
+label::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 35px;
+  background: var(--color-switch-stick-bg);
+  border-radius: 5px 5px 3px 3px;
+  bottom: 5px;
+  left: 50%;
+  translate: -50% 0;
+  transform-origin: bottom center;
+  transform: rotateX(-130deg);
+  transition: transform 0.2s ease-in;
+
+}
+
+body:has(input[type="checkbox"]:checked) label::before {
+  transform: rotateX(-10deg);
+}
+
+
+/* MARK:responsive */
+@media (min-width: 425px){
+  body > div:first-of-type{
+    width:260px;
+    height:280px;
+    transform: rotateX(-55deg);
+  }
+
+body > div:nth-of-type(2){
+  gap: 1rem;
+}
+
+  body > div:nth-of-type(2) > div:first-of-type > button {
+    width: 3rem;
+  }
+
+
+    button {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+
+  @media (min-width:1440px){
+    body > div:nth-of-type(2){
+width: 100%;
+    }
+  
+ 
+/* MARK: zij schermen */
+/* nodig voor pseudo-schermen */
+body > div:nth-of-type(2){
+  position: relative;
+}
+
+
+@media (min-width: 768px){
+  body > div:nth-of-type(2){
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
+
+  body > div:nth-of-type(2)::before,
+  body > div:nth-of-type(2)::after{
+    content: "";
+    position: absolute;
+    top: 5rem;
+    width: 12rem;
+    height: 12rem;         
+    background: #6f8fb3;    
+    border: 2px solid #4f6886;
+     border-radius: 2rem;
+  }
+
+  body > div:nth-of-type(2)::before{
+    left: 2rem;
+  }
+
+  body > div:nth-of-type(2)::after{
+    right: 2rem;
+  }
+}
+
+
+@media (min-width:1024px){
+    body > div:nth-of-type(2){
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
+
+  body > div:nth-of-type(2)::before,
+  body > div:nth-of-type(2)::after{
+    content: "";
+    position: absolute;
+    top: 5rem;
+    width: 16rem;
+    height: 16rem;        
+    background: #6f8fb3;   
+    border: 2px solid #4f6886;
+    border-radius: 2rem;
+  }
+
+  body > div:nth-of-type(2)::before{
+    left: 4rem;
+  }
+
+  body > div:nth-of-type(2)::after{
+    right: 4rem;
+  }
+}
+
+
+@property --radar-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes radar-spin {
+  from { --radar-angle: 320deg; } /* links */
+  to   { --radar-angle: 430deg; } /* rechts via bovenkant */
+}
+
+
+/* styling voor het rechterscherm */
+@media (min-width: 768px){
+
+  body > div:nth-of-type(2)::after{
+    background:
+      radial-gradient(circle, #8dff9c 0 4px, transparent 5px),
+      repeating-radial-gradient(circle, transparent 0 18px, #8dff9c33 19px 20px),
+      conic-gradient(from var(--radar-angle), transparent 0 320deg, #8dff9c99 0deg 360deg),
+      #0f2b1a;
+    background-repeat: no-repeat;
+    animation:
+      radar-spin 2.5s linear infinite alternate-reverse,
+      radar-blip 2.2s steps(2, end) infinite;
+  }
+}
+  }
 
