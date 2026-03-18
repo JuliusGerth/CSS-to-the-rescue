@@ -55,6 +55,10 @@ dat classes een blessing zijn en hoe je een beter logica kan maken zodat je css 
 
 voortgangs gesrpekken houden en daarna nog de 1e paar buttons toevoegen aan de cockpit.
 
+## week 2 samenvatting
+
+## 11/03/2026
+
 
 ## 12/03/2026(Dylan)
 
