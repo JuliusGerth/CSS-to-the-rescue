@@ -81,7 +81,20 @@ feedback sessie met Sanne.
 Uit het feedback sessie kwam dat er nog veel te doen is in de korte tijd die ik nog heb. Ik moet ervoor zorgen dat ik de pixels omzet in iets dat meer responsive is. En kijken of ik de 3D cube kan gebruiken voor dit project als een flick switch. Kies een thema uit dat erbij past. En verzin nog een titel die erbij past.
 
 
+## 18/03/2026
 
+### wat heb ik vandaag gedaan en hoelang duurde het?
+
+vandaag ben ik bezig geweest met het maken van een radar ervoor zorgen dat hij helemaal responsive is
+
+
+### wat heb ik geleerd?
+
+hoe je extra objecten kan toevoegen met before en after
+
+### wat ga ik morgen doen?
+
+css readme afmaken en easter egg toevoegen plus interacties toevoegen waar nog nodig is.
 
 ## bronnen 
 
