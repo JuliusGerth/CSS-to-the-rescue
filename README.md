@@ -190,7 +190,7 @@ Tijdens het maken van het project heb ik meer geleerd over css en dan ook de kra
 
 ### als ik meer tijd had wat dan?
 
-als ik meer tijd had dan zou ik nog meer gaan doen aan de styling bijvoorbeeld een svg texture filter gebruken voor de button box maar ook nog meer verdiepen in het nesten van css en het maken van iets 3D in css want dit was helemaal nieuw voor mij. en meer verdiepen in het geburiken van containers ik heb nu alleen een style container gebruikt maar weet zeker dat er veel meer krachtige dingen mee gedaan kunne worden
+als ik meer tijd had dan zou ik nog meer gaan doen aan de styling bijvoorbeeld een svg texture filter gebruken voor de button box maar ook nog meer verdiepen in het nesten van css en het maken van iets 3D in css want dit was helemaal nieuw voor mij. en meer verdiepen in het geburiken van containers ik heb nu alleen een style container gebruikt maar weet zeker dat er veel meer krachtige dingen mee gedaan kunne worden. Ik zou ook de achtergrond wat spannender gaan maken nu is het best plain en kan het saai overkomen dus misschien wat wolken toevoegen of een vliegtuigje als dat kan of zelfs een vliegde cubes
 
 
 ## bronnen 
