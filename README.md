@@ -101,14 +101,34 @@ hoe je extra objecten kan toevoegen met before en after
 css readme afmaken en easter egg toevoegen plus interacties toevoegen waar nog nodig is.
 
 ## bronnen 
-voor het maken vaan de behuizing 
+
+### font
+
+https://fontsource.org/fonts/quantico
+
+
+### voor het maken vaan de behuizing 
 
 https://bennettfeely.com/clippy/
 
 
 
 
-voor de items waar ik before heb gebruikt
+
+### voor de items waar ik before heb gebruikt
 
 https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::before
+
+
+### het leren van gradients
+https://www.youtube.com/watch?v=cWgb42tUYPA
+
+https://www.youtube.com/watch?v=XMEX9_HvW2k&t=2s
+
+
+### radar animatie
+gevraagd aan claude waarom hij eerst niet de juiste richting op spinde gaat over de radar animatie die spinde eerst via de onderkant
+
+ https://claude.ai/share/554724a1-56f7-4cd3-8fe9-bd73e5369f5e 
+
 
