@@ -101,7 +101,14 @@ hoe je extra objecten kan toevoegen met before en after
 css readme afmaken en easter egg toevoegen plus interacties toevoegen waar nog nodig is.
 
 ## bronnen 
+voor het maken vaan de behuizing 
 
-background image
+https://bennettfeely.com/clippy/
 
-https://flyawaysimulation.com/downloads/files/2589/fsx-lockheed-martin-f-16-complete-package/
+
+
+
+voor de items waar ik before heb gebruikt
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::before
+
