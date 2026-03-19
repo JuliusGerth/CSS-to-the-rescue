@@ -55,6 +55,7 @@ html:has(body > label:first-of-type > input[type="checkbox"]:checked) {
 }
 
 /* MARK: LAYOUT */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/perspective */
 body{
   min-height:100vh;
   display:flex;
@@ -189,7 +190,6 @@ body > div:nth-of-type(2){
   /*  RONDE BUTTONS */
   div:first-of-type{
     display:flex;
-    flex-wrap:wrap;
     justify-content:center;
     gap: 0.5rem;
     max-width:100%;
@@ -226,7 +226,7 @@ body > div:nth-of-type(2){
 }
 
   /* MARK: SWITCHES */
-  /* Alleen de 3e div BINNEN de buttonbox */
+/* https://www.w3schools.com/howto/howto_css_switch.asp */
   body > div:nth-of-type(2) > div:nth-of-type(3) {
     display: flex;
     justify-content: center;
@@ -239,7 +239,6 @@ body > div:nth-of-type(2){
       gap: 0.35rem;
       color: #fff;
       font: 600 0.8rem/1 Arial, sans-serif;
-      cursor: pointer;
 
       input {
         -webkit-appearance: none;
