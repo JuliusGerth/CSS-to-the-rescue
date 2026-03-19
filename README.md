@@ -150,6 +150,49 @@ hoe je extra objecten kan toevoegen met before en after
 
 css readme afmaken en easter egg toevoegen plus interacties toevoegen waar nog nodig is. en een container style querie toevoegen
 
+
+## 19/03/2026
+
+### wat heb ik vandaag gedaan en hoelang duurde het?
+
+vandaag heb ik de container toegevoegd normaal ziet er zo uit 
+<img width="559" height="752" alt="image" src="https://github.com/user-attachments/assets/be685470-8c98-4ee3-8ec2-d5d69c1839ec" />
+
+en als nightmode word aangezet worden alles meer groen neo achtig
+
+<img width="517" height="746" alt="image" src="https://github.com/user-attachments/assets/5bb84486-2d38-4ea0-99e6-ac3d05629fdd" />
+
+### wat heb ik geleerd?
+
+hoe je met een container heel veel kan aanpassen met heel weining code
+
+### wat ga ik morgen doen?
+
+morgen eindgesprek zin in
+
+## week 4 
+
+### mijn eindproduct
+
+mijn eindproduct is een control panel dat inspiratie haalt van de f16 cockpit je kan de hud aan en uit zetten en daarnaast heb ik ook een gedeelte van de cube toegevoegd op het linker scherm en op het rechter scherm heb ik een radar toegevoegd die je ook aan en uit kan zetten met een toggle switch. Je kan ook het thema naar nightmode doen.
+
+<img width="1919" height="909" alt="image" src="https://github.com/user-attachments/assets/2a53cb03-9c0b-4441-bc4d-66d3b8304aa2" />
+
+Het maken van de cockpit had wat ups en downs maar ik heb wel weer nieuwe dingen geleerd zoals het nesten van css en het gebruiken van containers waar dat handig is. De uitdaging voor mij was hoe ik mogelijk ook 3D kan toevoegen en kijken hoe ik nieuwe dingen die ik heb geleerd kan toepassen binnen mijn project
+
+### reflectie
+
+Het begin ging voor mij best moeizaam ik was eerst begonnen met de cubes maar dit ging hem niet worden voor mij dus ben ik overgestapt naar een control panel dit kilde een beetje motivatie omdat ik het gevoel had dat ik achterliep meteen. Dit gevoel ging snel weg toen ik weer aan de slag ging omdat ik nu iets ging maken wat me echt leuk leek om te maken. 
+
+Halverwege het project had ik wat tegen slagen omdat ik niet een flipswitch werkent kreeg op de manier die ik wilde dus heb ik daar te veel tijd aan gegeven waardoor andere dingen minder veel liefde hebben gekregen. Dit heeft me wel een les geleerd als iets niet werkt moet ik veel eerder om hulp gaan vragen bij een docent anders spendeer je teveel tijd aan 1 probleem.
+
+Tijdens het maken van het project heb ik meer geleerd over css en dan ook de kracht van css je kan er zo veel mee doen. Het nesten van css moet ik wel aan wennen en heb ik niet overall gebruikt maar het maakt soms wel makkelijker om css te lezen en hoe fijn het is om classes te kunnen gebruiken maar dat je niet voor alles een class hoeft te gebruiken.
+
+### als ik meer tijd had wat dan?
+
+als ik meer tijd had dan zou ik nog meer gaan doen aan de styling bijvoorbeeld een svg texture filter gebruken voor de button box maar ook nog meer verdiepen in het nesten van css en het maken van iets 3D in css want dit was helemaal nieuw voor mij. en meer verdiepen in het geburiken van containers ik heb nu alleen een style container gebruikt maar weet zeker dat er veel meer krachtige dingen mee gedaan kunne worden
+
+
 ## bronnen 
 
 ### font
