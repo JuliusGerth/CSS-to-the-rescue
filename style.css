@@ -43,42 +43,55 @@
   --color-switch-stick-bg: #888;
 }
 
-
 /* voor de nightmode container */
 html {
   --night: false;
   container-type: normal;
 }
 
-html:has(body > label:first-of-type > input[type="checkbox"]:checked) {
+html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(1) > input[type="checkbox"]:checked) {
   --night: true;
 }
 
 /* MARK: LAYOUT */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/perspective */
-body{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   background: var(--color-page-bg);
-  perspective:900px;
+  position: relative;
+  perspective: 900px;
   overflow: hidden;
 }
 
-body > label:first-of-type {
-  margin-top: 0.75rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #fff;
-
-input{
-    accent-color: #8dff9c;
-  }
+/* MARK: WOLKEN */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45vh;
+  pointer-events: none;
+  background-image:
+    url('assets/cloud-svgrepo-com.svg'),
+    url('assets/cloud-svgrepo-com.svg'),
+    url('assets/cloud-svgrepo-com.svg'),
+    url('assets/cloud-svgrepo-com.svg');
+  background-repeat: no-repeat;
+  background-size: 220px, 160px, 190px, 150px;
+  background-position: var(--wolk-1) 15%, var(--wolk-2) 60%, var(--wolk-3) 10%, var(--wolk-4) 55%;
+  animation:
+    wolk-1 7s linear infinite,
+    wolk-2 7s linear -3.5s infinite,
+    wolk-3 7s linear infinite,
+    wolk-4 7s linear -3.5s infinite;
 }
-/* Titel */
+
+/* MARK: TITEL */
 body > h1:first-of-type {
   margin-bottom: .5rem;
   position: relative;
@@ -91,195 +104,347 @@ body > h1:first-of-type {
     title-alarm 0.45s steps(2, end) 1.1s infinite;
 }
 
-
-
-
 /* MARK: BEHUIZING BUITENKANT */
-body > div:first-of-type{
-  width:240px;
-  height:240px;
+body > div:first-of-type {
+  width: 240px;
+  height: 240px;
   padding-top: 10px;
-  transform-origin:center bottom;
-  transform:rotateX(-35deg);
-  transform-style:preserve-3d;
+  transform-origin: center bottom;
+  transform: rotateX(-35deg);
+  transform-style: preserve-3d;
   /* https://bennettfeely.com/clippy/ */
-clip-path: polygon(
-  0% 0%,
-  92% 0%,
-  100% 20%,
-  100% 90%,
-  92% 100%,
-  8% 100%,
-  0% 90%,
-  0% 20%
-);
+  clip-path: polygon(
+    0% 0%, 92% 0%, 100% 20%, 100% 90%,
+    92% 100%, 8% 100%, 0% 90%, 0% 20%
+  );
 }
 
-
-
 /* MARK: BEHUIZING BINNENKANT */
-body > div:first-of-type > div{
-  width:100%;
-  height:100%;
-  position:relative;
-  overflow:hidden;
-  background:transparent;
-  border-top:14px solid var(--color-housing-top);
-  border-left:10px solid var(--color-housing-algemeen);
-  border-right:10px solid var(--color-housing-algemeen);
-  border-bottom:18px solid var(--color-housing-algemeen);
-  border-radius:120px 120px 20px 20px / 50px 50px 30px 30px;
-  transform-style:preserve-3d;
+body > div:first-of-type > div {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border-top: 14px solid var(--color-housing-top);
+  border-left: 10px solid var(--color-housing-algemeen);
+  border-right: 10px solid var(--color-housing-algemeen);
+  border-bottom: 18px solid var(--color-housing-algemeen);
+  border-radius: 120px 120px 20px 20px / 50px 50px 30px 30px;
+  transform-style: preserve-3d;
 }
 
 /* MARK: INHOUD BEHUIZING */
-body > div:first-of-type > div > div{
-  position:absolute;
-  inset:16% 10% 14%;
-  color:var(--color-screen);
-  text-shadow:0 0 4px var(--color-screen), 0 0 12px var(--color-screen-glow);
-  pointer-events:none;
-
-  ol {
-    list-style: none;
-    margin: 0;
-    padding: 0.4rem 0;
-    height: 100%;
-    display: grid;
-    grid-template-rows: repeat(5, 1fr);
-    gap: 0.2rem;
-
-    li {
-      display: grid;
-      grid-template-columns: 2rem 1fr 2rem;
-      align-items: center;
-      column-gap: 0.45rem;
-
-       span {
-        &:first-of-type,
-        &:last-of-type {
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 0.72rem;
-          letter-spacing: 0.08em;
-          text-align: center;
-          opacity: 0.95;
-        }
-
-        &:nth-of-type(2) {
-          height: 2px;
-          background: var(--color-screen);
-          box-shadow: 0 0 8px var(--color-screen-glow);
-        }
-      }
-    }
-  }
+body > div:first-of-type > div > div {
+  position: absolute;
+  inset: 16% 10% 14%;
+  color: var(--color-screen);
+  text-shadow: 0 0 4px var(--color-screen), 0 0 12px var(--color-screen-glow);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
+/* Power switch zet scherm aan */
+html:has(body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(2) > input[type="checkbox"]:checked) body > div:first-of-type > div > div {
+  opacity: 1;
+}
+
+/* MARK: CUBE IN BEHUIZING */
+body > div:first-of-type > div > div > div {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  perspective: 200px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(2) > input:checked) body > div:first-of-type > div > div > div {
+  opacity: 1;
+}
+
+html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(2) > input:checked) body > div:first-of-type > div > div > ol {
+  opacity: 0;
+}
+
+body > div:first-of-type > div > div > div > div {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cube-spin 4s linear infinite;
+}
+
+body > div:first-of-type > div > div > div > div > div {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-screen);
+  background: var(--color-screen-glow);
+}
+
+body > div:first-of-type > div > div > div > div > div:nth-of-type(1) { transform: translateZ(30px); }
+body > div:first-of-type > div > div > div > div > div:nth-of-type(2) { transform: rotateY(180deg) translateZ(30px); }
+body > div:first-of-type > div > div > div > div > div:nth-of-type(3) { transform: rotateY(90deg)  translateZ(30px); }
+body > div:first-of-type > div > div > div > div > div:nth-of-type(4) { transform: rotateY(-90deg) translateZ(30px); }
+body > div:first-of-type > div > div > div > div > div:nth-of-type(5) { transform: rotateX(90deg)  translateZ(30px); }
+body > div:first-of-type > div > div > div > div > div:nth-of-type(6) { transform: rotateX(-90deg) translateZ(30px); }
+
+body > div:first-of-type > div > div ol {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  gap: 0.2rem;
+}
+
+body > div:first-of-type > div > div ol li {
+  display: grid;
+  grid-template-columns: 2rem 1fr 2rem;
+  align-items: center;
+  column-gap: 0.45rem;
+}
+
+body > div:first-of-type > div > div ol li span:first-of-type,
+body > div:first-of-type > div > div ol li span:last-of-type {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  opacity: 0.95;
+}
+
+body > div:first-of-type > div > div ol li span:nth-of-type(2) {
+  height: 2px;
+  background: var(--color-screen);
+  box-shadow: 0 0 8px var(--color-screen-glow);
+}
 
 /* MARK: BUTTON BOX */
-body > div:nth-of-type(2){
-  width:100%;
-  flex:1;
-  background-color:var(--color-button-box-bg);
+body > div:nth-of-type(2) {
+  width: 100%;
+  flex: 1;
+  background-color: var(--color-button-box-bg);
   padding: 1rem;
-  display:grid;
-  align-content:start;
+  display: grid;
+  align-content: start;
   gap: 2rem;
   position: relative;
+}
 
-  /*  RONDE BUTTONS */
-  div:first-of-type{
-    display:flex;
-    justify-content:center;
-    gap: 0.5rem;
-    max-width:100%;
-    width:100%;
+/* RONDE BUTTONS */
+body > div:nth-of-type(2) > div:first-of-type {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 100%;
+  width: 100%;
+}
 
-    button{
-      width:2.5rem;
-      aspect-ratio:1;
-      border-radius:50%;
-      background:var(--color-top-button-bg);
-      color:var(--color-top-button-text);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-    }
+body > div:nth-of-type(2) > div:first-of-type > label {
+  width: 2.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: var(--color-top-button-bg);
+  color: var(--color-top-button-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
+}
+
+body > div:nth-of-type(2) > div:first-of-type > label input {
+  display: none;
+}
+
+body > div:nth-of-type(2) > div:first-of-type > button {
+  width: 2.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: var(--color-top-button-bg);
+  color: var(--color-top-button-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
+}
+
+/* 9 BUTTONS */
+body > div:nth-of-type(2) > div:nth-of-type(2) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+body > div:nth-of-type(2) > div:nth-of-type(2) > button,
+body > div:nth-of-type(2) > div:nth-of-type(2) > label {
+  background: var(--color-keypad-button-bg);
+  width: 3.6rem;
+  height: 3.6rem;
+  border: 1px solid transparent;
+  transition: background 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
+}
+
+body > div:nth-of-type(2) > div:nth-of-type(2) > label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+body > div:nth-of-type(2) > div:nth-of-type(2) > label > input {
+  display: none;
+}
+
+/* klik feedback */
+body > div:nth-of-type(2) > div:first-of-type > button:active,
+body > div:nth-of-type(2) > div:first-of-type > label:active,
+body > div:nth-of-type(2) > div:nth-of-type(2) > button:active,
+body > div:nth-of-type(2) > div:nth-of-type(2) > label:active {
+  transform: scale(0.91);
+  background: #505050;
+}
+
+/* c knop actief (cube mode) */
+body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(2):has(input:checked) {
+  border-color: var(--color-screen);
+  box-shadow: 0 0 8px var(--color-screen-glow);
+}
+
+/* ingeschakeld state voor knop 2 en 3 */
+body > div:nth-of-type(2) > div:nth-of-type(2) > label:has(input:checked) {
+  background: #7a4800;
+  border-color: #ff880066;
+  box-shadow: 0 0 8px #ff880033;
+}
+
+/* MARK: SWITCHES */
+/* https://www.w3schools.com/howto/howto_css_switch.asp */
+body > div:nth-of-type(2) > div:nth-of-type(3) {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+body > div:nth-of-type(2) > div:nth-of-type(3) label {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  color: #fff;
+  font: 600 0.8rem/1 Arial, sans-serif;
+}
+
+body > div:nth-of-type(2) > div:nth-of-type(3) label input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 52px;
+  height: 30px;
+  border-radius: 999px;
+  border: 2px solid #5f5f5f;
+  background: var(--color-switch-bg);
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+body > div:nth-of-type(2) > div:nth-of-type(3) label input::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s ease;
+}
+
+body > div:nth-of-type(2) > div:nth-of-type(3) label input:checked {
+  background: #4cd964;
+  border-color: #36b34f;
+}
+
+body > div:nth-of-type(2) > div:nth-of-type(3) label input:checked::before {
+  transform: translateX(22px);
+}
+
+/* MARK: NIGHT MODE */
+@container style(--night:true) {
+  body {
+    background: #070b12;
   }
 
-  /*  9 BUTTONS */
-  div:nth-of-type(2){
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    justify-items: center;
-    width: fit-content;
-    margin-inline: auto;
+  body::before {
+    display: none;
+  }
 
-    > button{
-      background:var(--color-keypad-button-bg);
-      width: 3.6rem;
-      height: 3.6rem;
-    }
+  body > h1:first-of-type {
+    color: #8dff9c;
+    text-shadow: 0 0 6px #8dff9c, 0 0 14px #8dff9c66;
+  }
+
+  body > div:first-of-type > div > div span {
+    color: #8dff9c;
+    text-shadow: 0 0 6px #8dff9c, 0 0 14px #8dff9c66;
+  }
+
+  body > div:nth-of-type(2) {
+    background-color: #11151d;
+  }
+
+  body > div:nth-of-type(2) > div:first-of-type > label,
+  body > div:nth-of-type(2) > div:first-of-type > button,
+  body > div:nth-of-type(2) > div:nth-of-type(2) > button,
+  body > div:nth-of-type(2) > div:nth-of-type(2) > label {
+    color: #8dff9c;
+    border-color: #8dff9c66;
+    text-shadow: 0 0 6px #8dff9c, 0 0 14px #8dff9c66;
+    box-shadow: 0 0 8px #8dff9c66, 0 0 16px #8dff9c33;
+  }
+
+  body > div:nth-of-type(2) > div:nth-of-type(3) > label {
+    color: #8dff9c;
   }
 }
 
-  /* MARK: SWITCHES */
-/* https://www.w3schools.com/howto/howto_css_switch.asp */
-  body > div:nth-of-type(2) > div:nth-of-type(3) {
-    display: flex;
-    justify-content: center;
-    gap: 1.25rem;
+/* MARK: EMERGENCY MODE */
+/* triggert wanneer knop 2 (label 1) en knop 3 (label 2) beide zijn ingeschakeld */
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body {
+  animation: emergency-flash 0.3s steps(2) infinite;
+}
 
-    label {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.35rem;
-      color: #fff;
-      font: 600 0.8rem/1 Arial, sans-serif;
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body::before {
+  display: none;
+}
 
-      input {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 52px;
-        height: 30px;
-        border-radius: 999px;
-        border: 2px solid #5f5f5f;
-        background: var(--color-switch-bg);
-        cursor: pointer;
-        position: relative;
-        transition: background-color 0.2s ease, border-color 0.2s ease;
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body > h1 {
+  animation: title-alarm 0.15s steps(2) infinite;
+  color: #ff0000;
+  text-shadow: 0 0 8px #ff0000, 0 0 30px #ff000099;
+}
 
-        &::before {
-          content: "";
-          position: absolute;
-          top: 2px;
-          left: 2px;
-          width: 22px;
-          height: 22px;
-          border-radius: 50%;
-          background: #fff;
-          transition: transform 0.2s ease;
-        }
 
-        &:checked {
-          background: #4cd964;
-          border-color: #36b34f;
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body > div:nth-of-type(2) {
+  background-color: #1a0000;
+}
 
-          &::before {
-            transform: translateX(22px);
-          }
-        }
-
-        &:checked::before {
-          transform: translateX(22px);
-        }
-      }
-    }
-  }
-
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body > div:nth-of-type(2) button,
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body > div:nth-of-type(2) > div:nth-of-type(2) label {
+  color: #ff4444;
+  text-shadow: 0 0 6px #ff4444;
+  box-shadow: inset 0 0 8px #ff222233;
+}
 
 /* MARK: RESPONSIVE */
 @media (min-width: 425px) {
@@ -293,28 +458,23 @@ body > div:nth-of-type(2){
     gap: 1rem;
   }
 
+  body > div:nth-of-type(2) > div:first-of-type > label,
   body > div:nth-of-type(2) > div:first-of-type > button {
     width: 3rem;
   }
 
-  button {
+  body > div:nth-of-type(2) > div:nth-of-type(2) > button,
+  body > div:nth-of-type(2) > div:nth-of-type(2) > label {
     width: 3rem;
     height: 3rem;
   }
 }
 
-@media (min-width: 1440px) {
-  body > div:nth-of-type(2) {
-    width: 100%;
-  }
-}
-
-/* MARK: ZIJ SCHERMEN */
-body > div:nth-of-type(2) {
-  position: relative;
-}
-
 @media (min-width: 768px) {
+  body {
+    padding-top: 5rem;
+  }
+
   body > div:nth-of-type(2) {
     padding-left: 10rem;
     padding-right: 10rem;
@@ -338,18 +498,23 @@ body > div:nth-of-type(2) {
     background: #6f8fb3;
     opacity: 0;
   }
-/* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/conic-gradient */
 
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/conic-gradient */
   body > div:nth-of-type(2)::after {
     right: 2rem;
     opacity: 1;
     background:
+      radial-gradient(circle at 68% 28%, rgb(255 0 0 / var(--blip-opacity)) 3px, rgb(255 0 0 / calc(var(--blip-opacity) * 0.3)) 7px, transparent 9px),
       radial-gradient(circle, #8dff9c 4px, transparent 5px),
       repeating-radial-gradient(circle, transparent 0 18px, #8dff9c33 19px 20px),
       conic-gradient(from var(--radar-angle), transparent 0 320deg, #8dff9c99 0deg 360deg),
       #0f2b1a;
     background-repeat: no-repeat;
     animation: none;
+  }
+
+  html:has(body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(3) > input[type="checkbox"]:checked) body > div:nth-of-type(2)::after {
+    animation: radar-spin 2.5s linear infinite alternate-reverse, blip-pulse 5s linear infinite;
   }
 }
 
@@ -369,85 +534,38 @@ body > div:nth-of-type(2) {
   }
 }
 
-/* MARK: SWITCH FUNCTIONALITEITEN */
-/* 1) Power (middelste switch) -> behuizing content aan/uit */
-body > div:first-of-type > div > div {
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-
-body:has(> div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(2) > input[type="checkbox"]:checked)
-  > div:first-of-type > div > div {
-  opacity: 1;
-}
-
-/*switch linker scherm/
-@media (min-width: 768px) {
-  body:has(> div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(1) > input[type="checkbox"]:checked)
-    > div:nth-of-type(2)::before {
-    opacity: 1;
-  }
-}
-
-/* switch rechter scherm */
-@media (min-width: 768px) {
-  body:has(> div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(3) > input[type="checkbox"]:checked)
-    > div:nth-of-type(2)::after {
-    animation: radar-spin 2.5s linear infinite alternate-reverse;
-  }
-}
-
-/* MARK: NIGHT MODE */
-@container style(--night:true) {
-  body {
-    background: #070b12;
-  }
-
+@media (min-width: 1440px) {
   body > div:nth-of-type(2) {
-    background-color: #11151d;
-  }
-
-  body > div:nth-of-type(2) button {
-    color: #8dff9c;
-    border-color: #8dff9c66;
-    text-shadow: 6px #8dff9c, 14px #8dff9c66;
-    box-shadow: inset 8px #8dff9c33, 12px #8dff9c33;
-  }
-
-  body > div:nth-of-type(2) > div:nth-of-type(3) > label {
-    color: #8dff9c;
-  }
-
-  body > h1:first-of-type {
-    color: #8dff9c;
-    text-shadow: 6px #8dff9c, 14px #8dff9c66;
-  }
-
-  body > div:first-of-type > div > div span {
-    color: #8dff9c;
-    text-shadow: 6px #8dff9c, 14px #8dff9c66;
+    width: 100%;
   }
 }
 
-
-/* MARK:animation */
-/* dit stukje code is gemaakt met behulp van owen */
+/* MARK: ANIMATIES */
 @property --radar-angle {
   syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
 }
-/* https://claude.ai/share/554724a1-56f7-4cd3-8fe9-bd73e5369f5e 
-gevraagd aan claude waarom hij eerst niet de juiste richting op spinde*/
+
+@property --blip-opacity { syntax: "<number>"; inherits: false; initial-value: 0; }
+
+@property --wolk-1 { syntax: "<percentage>"; inherits: false; initial-value: 110%; }
+@property --wolk-2 { syntax: "<percentage>"; inherits: false; initial-value: 110%; }
+@property --wolk-3 { syntax: "<percentage>"; inherits: false; initial-value: -30%; }
+@property --wolk-4 { syntax: "<percentage>"; inherits: false; initial-value: -30%; }
+
+/* dit stukje code is gemaakt met behulp van owen */
+/* https://claude.ai/share/554724a1-56f7-4cd3-8fe9-bd73e5369f5e
+gevraagd aan claude waarom hij eerst niet de juiste richting op spinde */
 @keyframes radar-spin {
-  from {
-    --radar-angle: 320deg;
-  }
-  to {
-    --radar-angle: 450deg;
-  }
+  from { --radar-angle: 320deg; }
+  to   { --radar-angle: 450deg; }
 }
 
+@keyframes wolk-1 { from { --wolk-1: 110%; } to { --wolk-1: -30%; } }
+@keyframes wolk-2 { from { --wolk-2: 110%; } to { --wolk-2: -30%; } }
+@keyframes wolk-3 { from { --wolk-3: -30%; } to { --wolk-3: 110%; } }
+@keyframes wolk-4 { from { --wolk-4: -30%; } to { --wolk-4: 110%; } }
 
 @keyframes title-flyin {
   0% {
@@ -484,4 +602,25 @@ gevraagd aan claude waarom hij eerst niet de juiste richting op spinde*/
     color: #ff3b3b;
     text-shadow: 0 0 6px #ff3b3b, 0 0 18px #ff3b3bcc, 0 0 30px #ff3b3b66;
   }
+}
+
+@keyframes emergency-flash {
+  from { background-color: #cc0000; }
+  to   { background-color: #110000; }
+}
+
+@keyframes emergency-glow {
+  from { box-shadow: 0 0 25px #ff0000, 0 0 60px #ff000066; }
+  to   { box-shadow: 0 0 6px #ff3333; }
+}
+
+@keyframes blip-pulse {
+  0%, 10%  { --blip-opacity: 0; }
+  12%      { --blip-opacity: 1; }
+  55%      { --blip-opacity: 0.08; }
+  62%      { --blip-opacity: 0; }
+  86%      { --blip-opacity: 0; }
+  88%      { --blip-opacity: 1; }
+  99%      { --blip-opacity: 0.08; }
+  100%     { --blip-opacity: 0; }
 }
