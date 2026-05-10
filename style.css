@@ -1,8 +1,8 @@
 /* MARK: RESET */
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* MARK: FONTS */
@@ -23,7 +23,9 @@
   font-display: swap;
 }
 
-:root{
+/* MARK: TOKENS */
+/* Globale kleurvariabelen zodat kleuren op één plek te wijzigen zijn. */
+:root {
   --color-page-bg: skyblue;
 
   --color-housing-top: #6b6b6b;
@@ -43,13 +45,22 @@
   --color-switch-stick-bg: #888;
 }
 
-/* voor de nightmode container */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/:has */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_size_and_style_queries */
+/* html fungeert als container zodat de @container style() nightmode-query werkt. */
 html {
   --night: false;
   container-type: normal;
 }
 
-html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(1) > input[type="checkbox"]:checked) {
+/* Zet --night op true als de n-knop is ingedrukt. */
+html:has(
+  body
+    > div:nth-of-type(2)
+    > div:first-of-type
+    > label:nth-of-type(1)
+    > input[type="checkbox"]:checked
+) {
   --night: true;
 }
 
@@ -77,13 +88,15 @@ body::before {
   height: 45vh;
   pointer-events: none;
   background-image:
-    url('assets/cloud-svgrepo-com.svg'),
-    url('assets/cloud-svgrepo-com.svg'),
-    url('assets/cloud-svgrepo-com.svg'),
-    url('assets/cloud-svgrepo-com.svg');
+    url("assets/cloud-svgrepo-com.svg"), url("assets/cloud-svgrepo-com.svg"),
+    url("assets/cloud-svgrepo-com.svg"), url("assets/cloud-svgrepo-com.svg");
   background-repeat: no-repeat;
   background-size: 220px, 160px, 190px, 150px;
-  background-position: var(--wolk-1) 15%, var(--wolk-2) 60%, var(--wolk-3) 10%, var(--wolk-4) 55%;
+  background-position:
+    var(--wolk-1) 15%,
+    var(--wolk-2) 60%,
+    var(--wolk-3) 10%,
+    var(--wolk-4) 55%;
   animation:
     wolk-1 7s linear infinite,
     wolk-2 7s linear -3.5s infinite,
@@ -93,15 +106,40 @@ body::before {
 
 /* MARK: TITEL */
 body > h1:first-of-type {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   position: relative;
-  font-family: "Quantico", Arial, sans-serif;
+  font-family: "Orbitron", Arial, sans-serif;
+  font-size: clamp(1.4rem, 5vw, 2.4rem);
   text-transform: uppercase;
+  letter-spacing: 0.18em;
   transform-origin: center;
   color: #ffd7d7;
   animation:
     title-flyin 1.1s ease-out both,
     title-alarm 0.45s steps(2, end) 1.1s infinite;
+}
+
+/* Twee gekleurde kopieën van de tekst die sporadisch glitchen met clip-path. */
+body > h1:first-of-type::before,
+body > h1:first-of-type::after {
+  content: "AFTERBURNER";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+}
+
+body > h1:first-of-type::before {
+  color: #ff003c;
+  clip-path: polygon(0 15%, 100% 15%, 100% 45%, 0 45%);
+  animation: glitch-slice 4s steps(3) infinite 1.1s;
+}
+
+body > h1:first-of-type::after {
+  color: #00e5ff;
+  clip-path: polygon(0 55%, 100% 55%, 100% 85%, 0 85%);
+  animation: glitch-slice 4s steps(3) infinite -0.7s;
 }
 
 /* MARK: BEHUIZING BUITENKANT */
@@ -113,9 +151,16 @@ body > div:first-of-type {
   transform: rotateX(-35deg);
   transform-style: preserve-3d;
   /* https://bennettfeely.com/clippy/ */
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path */
   clip-path: polygon(
-    0% 0%, 92% 0%, 100% 20%, 100% 90%,
-    92% 100%, 8% 100%, 0% 90%, 0% 20%
+    0% 0%,
+    92% 0%,
+    100% 20%,
+    100% 90%,
+    92% 100%,
+    8% 100%,
+    0% 90%,
+    0% 20%
   );
 }
 
@@ -139,17 +184,30 @@ body > div:first-of-type > div > div {
   position: absolute;
   inset: 16% 10% 14%;
   color: var(--color-screen);
-  text-shadow: 0 0 4px var(--color-screen), 0 0 12px var(--color-screen-glow);
+  text-shadow:
+    0 0 4px var(--color-screen),
+    0 0 12px var(--color-screen-glow);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.25s ease;
 }
 
 /* Power switch zet scherm aan */
-html:has(body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(2) > input[type="checkbox"]:checked) body > div:first-of-type > div > div {
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(3)
+      > label:nth-of-type(2)
+      > input[type="checkbox"]:checked
+  )
+  body
+  > div:first-of-type
+  > div
+  > div {
   opacity: 1;
 }
 
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Transforms/Using */
 /* MARK: CUBE IN BEHUIZING */
 body > div:first-of-type > div > div > div {
   position: absolute;
@@ -161,11 +219,34 @@ body > div:first-of-type > div > div > div {
   transition: opacity 0.25s ease;
 }
 
-html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(2) > input:checked) body > div:first-of-type > div > div > div {
+/* Toon de kubus en verberg de meetdata als de c-knop actief is. */
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:first-of-type
+      > label:nth-of-type(2)
+      > input:checked
+  )
+  body
+  > div:first-of-type
+  > div
+  > div
+  > div {
   opacity: 1;
 }
 
-html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(2) > input:checked) body > div:first-of-type > div > div > ol {
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:first-of-type
+      > label:nth-of-type(2)
+      > input:checked
+  )
+  body
+  > div:first-of-type
+  > div
+  > div
+  > ol {
   opacity: 0;
 }
 
@@ -184,13 +265,27 @@ body > div:first-of-type > div > div > div > div > div {
   background: var(--color-screen-glow);
 }
 
-body > div:first-of-type > div > div > div > div > div:nth-of-type(1) { transform: translateZ(30px); }
-body > div:first-of-type > div > div > div > div > div:nth-of-type(2) { transform: rotateY(180deg) translateZ(30px); }
-body > div:first-of-type > div > div > div > div > div:nth-of-type(3) { transform: rotateY(90deg)  translateZ(30px); }
-body > div:first-of-type > div > div > div > div > div:nth-of-type(4) { transform: rotateY(-90deg) translateZ(30px); }
-body > div:first-of-type > div > div > div > div > div:nth-of-type(5) { transform: rotateX(90deg)  translateZ(30px); }
-body > div:first-of-type > div > div > div > div > div:nth-of-type(6) { transform: rotateX(-90deg) translateZ(30px); }
+/* De zes vlakken van de kubus worden elk naar hun 3D-positie geschoven. */
+body > div:first-of-type > div > div > div > div > div:nth-of-type(1) {
+  transform: translateZ(30px);
+}
+body > div:first-of-type > div > div > div > div > div:nth-of-type(2) {
+  transform: rotateY(180deg) translateZ(30px);
+}
+body > div:first-of-type > div > div > div > div > div:nth-of-type(3) {
+  transform: rotateY(90deg) translateZ(30px);
+}
+body > div:first-of-type > div > div > div > div > div:nth-of-type(4) {
+  transform: rotateY(-90deg) translateZ(30px);
+}
+body > div:first-of-type > div > div > div > div > div:nth-of-type(5) {
+  transform: rotateX(90deg) translateZ(30px);
+}
+body > div:first-of-type > div > div > div > div > div:nth-of-type(6) {
+  transform: rotateX(-90deg) translateZ(30px);
+}
 
+/* Meetdata als vijf rijen met een getal links, streep in het midden en getal rechts. */
 body > div:first-of-type > div > div ol {
   list-style: none;
   margin: 0;
@@ -208,8 +303,7 @@ body > div:first-of-type > div > div ol li {
   column-gap: 0.45rem;
 }
 
-body > div:first-of-type > div > div ol li span:first-of-type,
-body > div:first-of-type > div > div ol li span:last-of-type {
+body > div:first-of-type > div > div ol li span:not(:nth-of-type(2)) {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
@@ -235,6 +329,14 @@ body > div:nth-of-type(2) {
   position: relative;
 }
 
+/* Gedeelde transition voor alle knoppen in de button box. */
+body > div:nth-of-type(2) > div:first-of-type > label,
+body > div:nth-of-type(2) > div:first-of-type > button,
+body > div:nth-of-type(2) > div:nth-of-type(2) > button,
+body > div:nth-of-type(2) > div:nth-of-type(2) > label {
+  transition: background 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
+}
+
 /* RONDE BUTTONS */
 body > div:nth-of-type(2) > div:first-of-type {
   display: flex;
@@ -255,7 +357,6 @@ body > div:nth-of-type(2) > div:first-of-type > label {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
 }
 
 body > div:nth-of-type(2) > div:first-of-type > label input {
@@ -273,7 +374,6 @@ body > div:nth-of-type(2) > div:first-of-type > button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: background 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
 }
 
 /* 9 BUTTONS */
@@ -292,7 +392,6 @@ body > div:nth-of-type(2) > div:nth-of-type(2) > label {
   width: 3.6rem;
   height: 3.6rem;
   border: 1px solid transparent;
-  transition: background 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
 }
 
 body > div:nth-of-type(2) > div:nth-of-type(2) > label {
@@ -316,7 +415,10 @@ body > div:nth-of-type(2) > div:nth-of-type(2) > label:active {
 }
 
 /* c knop actief (cube mode) */
-body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(2):has(input:checked) {
+body
+  > div:nth-of-type(2)
+  > div:first-of-type
+  > label:nth-of-type(2):has(input:checked) {
   border-color: var(--color-screen);
   box-shadow: 0 0 8px var(--color-screen-glow);
 }
@@ -330,6 +432,7 @@ body > div:nth-of-type(2) > div:nth-of-type(2) > label:has(input:checked) {
 
 /* MARK: SWITCHES */
 /* https://www.w3schools.com/howto/howto_css_switch.asp */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/:checked */
 body > div:nth-of-type(2) > div:nth-of-type(3) {
   display: flex;
   justify-content: center;
@@ -342,7 +445,9 @@ body > div:nth-of-type(2) > div:nth-of-type(3) label {
   align-items: center;
   gap: 0.35rem;
   color: #fff;
-  font: 600 0.8rem/1 Arial, sans-serif;
+  font:
+    600 0.8rem/1 Arial,
+    sans-serif;
 }
 
 body > div:nth-of-type(2) > div:nth-of-type(3) label input {
@@ -355,7 +460,9 @@ body > div:nth-of-type(2) > div:nth-of-type(3) label input {
   background: var(--color-switch-bg);
   cursor: pointer;
   position: relative;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 body > div:nth-of-type(2) > div:nth-of-type(3) label input::before {
@@ -379,6 +486,12 @@ body > div:nth-of-type(2) > div:nth-of-type(3) label input:checked::before {
   transform: translateX(22px);
 }
 
+/* cube en radar verborgen op klein scherm */
+body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(1),
+body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(3) {
+  display: none;
+}
+
 /* MARK: NIGHT MODE */
 @container style(--night:true) {
   body {
@@ -391,12 +504,16 @@ body > div:nth-of-type(2) > div:nth-of-type(3) label input:checked::before {
 
   body > h1:first-of-type {
     color: #8dff9c;
-    text-shadow: 0 0 6px #8dff9c, 0 0 14px #8dff9c66;
+    text-shadow:
+      0 0 6px #8dff9c,
+      0 0 14px #8dff9c66;
   }
 
   body > div:first-of-type > div > div span {
     color: #8dff9c;
-    text-shadow: 0 0 6px #8dff9c, 0 0 14px #8dff9c66;
+    text-shadow:
+      0 0 6px #8dff9c,
+      0 0 14px #8dff9c66;
   }
 
   body > div:nth-of-type(2) {
@@ -409,8 +526,12 @@ body > div:nth-of-type(2) > div:nth-of-type(3) label input:checked::before {
   body > div:nth-of-type(2) > div:nth-of-type(2) > label {
     color: #8dff9c;
     border-color: #8dff9c66;
-    text-shadow: 0 0 6px #8dff9c, 0 0 14px #8dff9c66;
-    box-shadow: 0 0 8px #8dff9c66, 0 0 16px #8dff9c33;
+    text-shadow:
+      0 0 6px #8dff9c,
+      0 0 14px #8dff9c66;
+    box-shadow:
+      0 0 8px #8dff9c66,
+      0 0 16px #8dff9c33;
   }
 
   body > div:nth-of-type(2) > div:nth-of-type(3) > label {
@@ -419,34 +540,168 @@ body > div:nth-of-type(2) > div:nth-of-type(3) label input:checked::before {
 }
 
 /* MARK: EMERGENCY MODE */
-/* triggert wanneer knop 2 (label 1) en knop 3 (label 2) beide zijn ingeschakeld */
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body {
+/* https://www.joshwcomeau.com/css/has/ */
+/* Activeert als knop 2 én knop 3 tegelijk zijn ingedrukt. */
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(1)
+      > input:checked
+  ):has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(2)
+      > input:checked
+  )
+  body {
   animation: emergency-flash 0.3s steps(2) infinite;
 }
 
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body::before {
-  display: none;
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(1)
+      > input:checked
+  ):has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(2)
+      > input:checked
+  )
+  /* Raket schiet van het cockpit af naar de rechterbovenhoek. */
+  body::before {
+  background-image: url('assets/rocket-bomb-svgrepo-com.svg');
+  background-size: 70px;
+  background-repeat: no-repeat;
+  animation: rocket-launch 1.6s ease-in infinite;
 }
 
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body > h1 {
+/* Maak de titel feller rood en versnel de alarm-animatie. */
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(1)
+      > input:checked
+  ):has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(2)
+      > input:checked
+  )
+  body
+  > h1 {
   animation: title-alarm 0.15s steps(2) infinite;
   color: #ff0000;
-  text-shadow: 0 0 8px #ff0000, 0 0 30px #ff000099;
+  text-shadow:
+    0 0 8px #ff0000,
+    0 0 30px #ff000099;
 }
 
-
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body > div:nth-of-type(2) {
+/* Donkerrode achtergrond voor de button box. */
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(1)
+      > input:checked
+  ):has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(2)
+      > input:checked
+  )
+  body
+  > div:nth-of-type(2) {
   background-color: #1a0000;
 }
 
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body > div:nth-of-type(2) button,
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) body > div:nth-of-type(2) > div:nth-of-type(2) label {
+/* Rode gloed op alle knoppen in emergency mode. */
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(1)
+      > input:checked
+  ):has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(2)
+      > input:checked
+  )
+  body
+  > div:nth-of-type(2)
+  button,
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(1)
+      > input:checked
+  ):has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(2)
+      > input:checked
+  )
+  body
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  label {
   color: #ff4444;
   text-shadow: 0 0 6px #ff4444;
   box-shadow: inset 0 0 8px #ff222233;
 }
 
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(1)
+      > input:checked
+  ):has(
+    body
+      > div:nth-of-type(2)
+      > div:nth-of-type(2)
+      > label:nth-of-type(2)
+      > input:checked
+  )
+  /* Vijf vuurvlammen onderaan het scherm via body::after en de fire SVG. */
+  body::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  pointer-events: none;
+  z-index: 10;
+  background-image:
+    url("assets/fire-svgrepo-com.svg"), url("assets/fire-svgrepo-com.svg"),
+    url("assets/fire-svgrepo-com.svg"), url("assets/fire-svgrepo-com.svg"),
+    url("assets/fire-svgrepo-com.svg");
+  background-repeat: no-repeat;
+  background-size: 80px, 60px, 100px, 70px, 55px;
+  background-position:
+    5% 100%,
+    22% 100%,
+    50% 100%,
+    78% 100%,
+    95% 100%;
+  transform-origin: bottom center;
+  animation: fire-flicker 0.25s steps(2) infinite alternate;
+}
+
 /* MARK: RESPONSIVE */
+/* Grotere behuizing en knoppen op bredere telefoons. */
 @media (min-width: 425px) {
   body > div:first-of-type {
     width: 260px;
@@ -470,9 +725,15 @@ html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) >
   }
 }
 
+/* Tablet: radarscherm en extra paneel zichtbaar, cube- en radarswitch terug. */
 @media (min-width: 768px) {
   body {
     padding-top: 5rem;
+  }
+
+  body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(1),
+  body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(3) {
+    display: inline-flex;
   }
 
   body > div:nth-of-type(2) {
@@ -504,20 +765,44 @@ html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) >
     right: 2rem;
     opacity: 1;
     background:
-      radial-gradient(circle at 68% 28%, rgb(255 0 0 / var(--blip-opacity)) 3px, rgb(255 0 0 / calc(var(--blip-opacity) * 0.3)) 7px, transparent 9px),
+      radial-gradient(
+        circle at 68% 28%,
+        rgb(255 0 0 / var(--blip-opacity)) 3px,
+        rgb(255 0 0 / calc(var(--blip-opacity) * 0.3)) 7px,
+        transparent 9px
+      ),
       radial-gradient(circle, #8dff9c 4px, transparent 5px),
-      repeating-radial-gradient(circle, transparent 0 18px, #8dff9c33 19px 20px),
-      conic-gradient(from var(--radar-angle), transparent 0 320deg, #8dff9c99 0deg 360deg),
+      repeating-radial-gradient(
+        circle,
+        transparent 0 18px,
+        #8dff9c33 19px 20px
+      ),
+      conic-gradient(
+        from var(--radar-angle),
+        transparent 0 320deg,
+        #8dff9c99 0deg 360deg
+      ),
       #0f2b1a;
     background-repeat: no-repeat;
     animation: none;
   }
 
-  html:has(body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(3) > input[type="checkbox"]:checked) body > div:nth-of-type(2)::after {
-    animation: radar-spin 2.5s linear infinite alternate-reverse, blip-pulse 5s linear infinite;
+  html:has(
+      body
+        > div:nth-of-type(2)
+        > div:nth-of-type(3)
+        > label:nth-of-type(3)
+        > input[type="checkbox"]:checked
+    )
+    body
+    > div:nth-of-type(2)::after {
+    animation:
+      radar-spin 2.5s linear infinite alternate-reverse,
+      blip-pulse 5s linear infinite;
   }
 }
 
+/* Desktop: zijpanelen groter. */
 @media (min-width: 1024px) {
   body > div:nth-of-type(2)::before,
   body > div:nth-of-type(2)::after {
@@ -534,6 +819,7 @@ html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) >
   }
 }
 
+/* Breed scherm: button box vult de volledige breedte. */
 @media (min-width: 1440px) {
   body > div:nth-of-type(2) {
     width: 100%;
@@ -541,86 +827,217 @@ html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) >
 }
 
 /* MARK: ANIMATIES */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@keyframes */
+/* @property maakt het mogelijk om CSS-variabelen te animeren met keyframes. */
 @property --radar-angle {
   syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
 }
 
-@property --blip-opacity { syntax: "<number>"; inherits: false; initial-value: 0; }
+@property --blip-opacity {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
 
-@property --wolk-1 { syntax: "<percentage>"; inherits: false; initial-value: 110%; }
-@property --wolk-2 { syntax: "<percentage>"; inherits: false; initial-value: 110%; }
-@property --wolk-3 { syntax: "<percentage>"; inherits: false; initial-value: -30%; }
-@property --wolk-4 { syntax: "<percentage>"; inherits: false; initial-value: -30%; }
+@property --wolk-1 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 110%;
+}
+@property --wolk-2 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 110%;
+}
+@property --wolk-3 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -30%;
+}
+@property --wolk-4 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -30%;
+}
 
+/* MARK: ANIMATIES — RADAR */
 /* dit stukje code is gemaakt met behulp van owen */
 /* https://claude.ai/share/554724a1-56f7-4cd3-8fe9-bd73e5369f5e
 gevraagd aan claude waarom hij eerst niet de juiste richting op spinde */
 @keyframes radar-spin {
-  from { --radar-angle: 320deg; }
-  to   { --radar-angle: 450deg; }
+  from {
+    --radar-angle: 320deg;
+  }
+  to {
+    --radar-angle: 450deg;
+  }
 }
 
-@keyframes wolk-1 { from { --wolk-1: 110%; } to { --wolk-1: -30%; } }
-@keyframes wolk-2 { from { --wolk-2: 110%; } to { --wolk-2: -30%; } }
-@keyframes wolk-3 { from { --wolk-3: -30%; } to { --wolk-3: 110%; } }
-@keyframes wolk-4 { from { --wolk-4: -30%; } to { --wolk-4: 110%; } }
+/* MARK: ANIMATIES — WOLKEN */
+/* Wolken schuiven horizontaal over het scherm van rechts naar links (1+2) of andersom (3+4). */
+@keyframes wolk-1 {
+  from {
+    --wolk-1: 110%;
+  }
+  to {
+    --wolk-1: -30%;
+  }
+}
+@keyframes wolk-2 {
+  from {
+    --wolk-2: 110%;
+  }
+  to {
+    --wolk-2: -30%;
+  }
+}
+@keyframes wolk-3 {
+  from {
+    --wolk-3: -30%;
+  }
+  to {
+    --wolk-3: 110%;
+  }
+}
+@keyframes wolk-4 {
+  from {
+    --wolk-4: -30%;
+  }
+  to {
+    --wolk-4: 110%;
+  }
+}
 
+/* MARK: ANIMATIES — TITEL */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function/steps */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path */
+/* Titel vliegt van links naar binnen met een kleine overshoots. */
 @keyframes title-flyin {
+  /* start: volledig buiten beeld links */
   0% {
     transform: translateX(-120vw) translateY(10px) rotate(-8deg) scale(0.9);
     opacity: 0;
     letter-spacing: 0.04em;
   }
+  /* overshoot: te ver naar rechts doorgeschoten */
   65% {
     transform: translateX(50vw) translateY(-1px) rotate(1deg) scale(1.02);
     opacity: 1;
   }
+  /* terugslag: iets te ver terug naar links */
   95% {
     transform: translateX(-20vw) translateY(0) rotate(-0.4deg) scale(0.995);
   }
+  /* landing: op de eindpositie */
   100% {
     transform: translateX(0) translateY(0) rotate(0deg) scale(1);
     opacity: 1;
   }
 }
 
+/* Gekleurde tekstlagen springen kort van positie voor een digitaal storingseffect. */
+@keyframes glitch-slice {
+  0%, 88%   { opacity: 0; transform: translate(0); }
+  89%       { opacity: 1; transform: translate(-7px, 0); }
+  91%       { opacity: 1; transform: translate(7px, -1px); }
+  92%       { opacity: 1; transform: translate(-5px, 2px); }
+  93%       { opacity: 1; transform: translate(4px, 0); }
+  95%, 100% { opacity: 0; transform: translate(0); }
+}
+
+/* Titel trilt licht en wisselt tussen helder en donkerrood. */
 @keyframes title-alarm {
   0% {
     transform: translateX(-1px) rotate(-0.7deg);
     color: #ff3b3b;
-    text-shadow: 0 0 6px #ff3b3b, 0 0 18px #ff3b3bcc, 0 0 30px #ff3b3b66;
+    text-shadow:
+      0 0 8px #ff3b3b,
+      0 0 24px #ff3b3bcc,
+      0 0 50px #ff3b3b88,
+      0 0 80px #ff000044;
   }
   50% {
     transform: translateX(1px) rotate(0.7deg);
     color: #ffd1d1;
-    text-shadow: 0 0 2px #ff9b9b, 0 0 8px #ff3b3b88;
+    text-shadow:
+      0 0 2px #ff9b9b,
+      0 0 10px #ff3b3b66;
   }
   100% {
     transform: translateX(-1px) rotate(-0.7deg);
     color: #ff3b3b;
-    text-shadow: 0 0 6px #ff3b3b, 0 0 18px #ff3b3bcc, 0 0 30px #ff3b3b66;
+    text-shadow:
+      0 0 8px #ff3b3b,
+      0 0 24px #ff3b3bcc,
+      0 0 50px #ff3b3b88,
+      0 0 80px #ff000044;
   }
 }
 
+/* MARK: ANIMATIES — EMERGENCY MODE */
+/* Achtergrond knippert tussen felrood en bijna-zwart in emergency mode. */
 @keyframes emergency-flash {
-  from { background-color: #cc0000; }
-  to   { background-color: #110000; }
+  from {
+    background-color: #cc0000;
+  }
+  to {
+    background-color: #110000;
+  }
 }
 
+/* Rode gloed pulseert van intens naar zwak (momenteel niet in gebruik). */
 @keyframes emergency-glow {
-  from { box-shadow: 0 0 25px #ff0000, 0 0 60px #ff000066; }
-  to   { box-shadow: 0 0 6px #ff3333; }
+  from {
+    box-shadow:
+      0 0 25px #ff0000,
+      0 0 60px #ff000066;
+  }
+  to {
+    box-shadow: 0 0 6px #ff3333;
+  }
 }
 
+/* Vlammen krimpen licht en worden iets minder opaque voor een flikkereffect. */
+@keyframes fire-flicker {
+  from {
+    transform: scaleY(1) scaleX(1);
+    opacity: 1;
+  }
+  to {
+    transform: scaleY(0.88) scaleX(1.04);
+    opacity: 0.82;
+  }
+}
+
+/* MARK: ANIMATIES — RADAR */
+/* Radarblip flitst op op twee momenten per cyclus. */
 @keyframes blip-pulse {
-  0%, 10%  { --blip-opacity: 0; }
-  12%      { --blip-opacity: 1; }
-  55%      { --blip-opacity: 0.08; }
-  62%      { --blip-opacity: 0; }
-  86%      { --blip-opacity: 0; }
-  88%      { --blip-opacity: 1; }
-  99%      { --blip-opacity: 0.08; }
-  100%     { --blip-opacity: 0; }
+  0%,
+  10% {
+    --blip-opacity: 0;
+  }
+  12% {
+    --blip-opacity: 1;
+  }
+  55% {
+    --blip-opacity: 0.08;
+  }
+  62% {
+    --blip-opacity: 0;
+  }
+  86% {
+    --blip-opacity: 0;
+  }
+  88% {
+    --blip-opacity: 1;
+  }
+  99% {
+    --blip-opacity: 0.08;
+  }
+  100% {
+    --blip-opacity: 0;
+  }
 }

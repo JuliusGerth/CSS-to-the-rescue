@@ -197,44 +197,47 @@ als ik meer tijd had dan zou ik nog meer gaan doen aan de styling bijvoorbeeld e
 
 ## bronnen 
 
-font
-
+**font**
 https://fontsource.org/fonts/quantico
 
-
-voor het maken vaan de behuizing 
-
+**clip-path behuizing**
 https://bennettfeely.com/clippy/
+https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
 
-voor de items waar ik before heb gebruikt
-
+**::before en ::after**
 https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::before
 
-
-het leren van gradients
+**gradients**
 https://www.youtube.com/watch?v=cWgb42tUYPA
-
 https://www.youtube.com/watch?v=XMEX9_HvW2k&t=2s
+https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/conic-gradient
 
-
-radar animatie
-
+**radar animatie**
 gevraagd aan claude waarom hij eerst niet de juiste richting op spinde gaat over de radar animatie die spinde eerst via de onderkant
+https://claude.ai/share/554724a1-56f7-4cd3-8fe9-bd73e5369f5e
 
- https://claude.ai/share/554724a1-56f7-4cd3-8fe9-bd73e5369f5e 
-
-toggle switch
-
+**toggle switch / :checked**
 https://www.w3schools.com/howto/howto_css_switch.asp
+https://developer.mozilla.org/en-US/docs/Web/CSS/:checked
 
+**:has() selector**
+https://developer.mozilla.org/en-US/docs/Web/CSS/:has
+https://www.joshwcomeau.com/css/has/
 
-style container 
+**container style queries**
 https://ishadeed.com/article/css-container-style-queries/
+https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_size_and_style_queries
 
+**@property**
+https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property
 
-algemeen 
-
-https://codepen.io/shooft/pen/PoOXLoZ
-
+**3D transforms**
+https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Transforms/Using
 https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/perspective
 
+**@keyframes / steps()**
+https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@keyframes
+https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/easing-function/steps
+
+**algemeen**
+https://codepen.io/shooft/pen/PoOXLoZ
