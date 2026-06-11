@@ -36,6 +36,20 @@
 
   --color-switch-bg: #7e7c7a;
   --color-switch-stick-bg: #888;
+
+  /* Gedeelde MFD-housing voor cube-box en radar: frame, scherm en knopjes. */
+  --mfd-frame: #17191c;
+  --mfd-scherm: linear-gradient(#22303c, #101a22);
+  --mfd-knoppen-rij: repeating-linear-gradient(
+    to right,
+    #62686e 0 0.4rem,
+    transparent 0.4rem 0.75rem
+  );
+  --mfd-knoppen-kolom: repeating-linear-gradient(
+    to bottom,
+    #62686e 0 0.4rem,
+    transparent 0.4rem 0.75rem
+  );
 }
 
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/:has */
@@ -67,7 +81,7 @@ body {
   justify-content: flex-start;
   background: var(--color-page-bg);
   position: relative;
-  perspective: 900px;
+  perspective: 56.25rem;
   overflow: hidden;
 }
 
@@ -84,7 +98,7 @@ body::before {
     url("assets/cloud-svgrepo-com.svg"), url("assets/cloud-svgrepo-com.svg"),
     url("assets/cloud-svgrepo-com.svg"), url("assets/cloud-svgrepo-com.svg");
   background-repeat: no-repeat;
-  background-size: 220px, 160px, 190px, 150px;
+  background-size: 13.75rem, 10rem, 11.875rem, 9.375rem;
   background-position:
     var(--wolk-1) 15%,
     var(--wolk-2) 60%,
@@ -137,9 +151,9 @@ body > h1:first-of-type::after {
 
 /* MARK: BEHUIZING BUITENKANT */
 body > div:first-of-type {
-  width: 240px;
-  height: 240px;
-  padding-top: 10px;
+  width: 15rem;
+  height: 15rem;
+  padding-top: 0.625rem;
   transform-origin: center bottom;
   transform: rotateX(-35deg);
   transform-style: preserve-3d;
@@ -164,11 +178,12 @@ body > div:first-of-type > div {
   position: relative;
   overflow: hidden;
   background: transparent;
-  border-top: 14px solid var(--color-housing-top);
-  border-left: 10px solid var(--color-housing-algemeen);
-  border-right: 10px solid var(--color-housing-algemeen);
-  border-bottom: 18px solid var(--color-housing-algemeen);
-  border-radius: 120px 120px 20px 20px / 50px 50px 30px 30px;
+  border-top: 0.875rem solid var(--color-housing-top);
+  border-left: 0.625rem solid var(--color-housing-algemeen);
+  border-right: 0.625rem solid var(--color-housing-algemeen);
+  border-bottom: 1.125rem solid var(--color-housing-algemeen);
+  border-radius: 7.5rem 7.5rem 1.25rem 1.25rem / 3.125rem 3.125rem 1.875rem
+    1.875rem;
   transform-style: preserve-3d;
 }
 
@@ -207,7 +222,7 @@ body > div:first-of-type > div > div > div {
   inset: 0;
   display: grid;
   place-items: center;
-  perspective: 200px;
+  perspective: 12.5rem;
   opacity: 0;
   transition: opacity 0.25s ease;
 }
@@ -244,8 +259,8 @@ html:has(
 }
 
 body > div:first-of-type > div > div > div > div {
-  width: 60px;
-  height: 60px;
+  width: 3.75rem;
+  height: 3.75rem;
   position: relative;
   transform-style: preserve-3d;
   animation: cube-spin 4s linear infinite;
@@ -260,22 +275,22 @@ body > div:first-of-type > div > div > div > div > div {
 
 /* De zes vlakken van de kubus worden elk naar hun 3D-positie geschoven. */
 body > div:first-of-type > div > div > div > div > div:nth-of-type(1) {
-  transform: translateZ(30px);
+  transform: translateZ(1.875rem);
 }
 body > div:first-of-type > div > div > div > div > div:nth-of-type(2) {
-  transform: rotateY(180deg) translateZ(30px);
+  transform: rotateY(180deg) translateZ(1.875rem);
 }
 body > div:first-of-type > div > div > div > div > div:nth-of-type(3) {
-  transform: rotateY(90deg) translateZ(30px);
+  transform: rotateY(90deg) translateZ(1.875rem);
 }
 body > div:first-of-type > div > div > div > div > div:nth-of-type(4) {
-  transform: rotateY(-90deg) translateZ(30px);
+  transform: rotateY(-90deg) translateZ(1.875rem);
 }
 body > div:first-of-type > div > div > div > div > div:nth-of-type(5) {
-  transform: rotateX(90deg) translateZ(30px);
+  transform: rotateX(90deg) translateZ(1.875rem);
 }
 body > div:first-of-type > div > div > div > div > div:nth-of-type(6) {
-  transform: rotateX(-90deg) translateZ(30px);
+  transform: rotateX(-90deg) translateZ(1.875rem);
 }
 
 /* Meetdata als vijf rijen met een getal links, streep in het midden en getal rechts. */
@@ -305,7 +320,7 @@ body > div:first-of-type > div > div ol li span:not(:nth-of-type(2)) {
 }
 
 body > div:first-of-type > div > div ol li span:nth-of-type(2) {
-  height: 2px;
+  height: 0.125rem;
   background: var(--color-screen);
   box-shadow: 0 0 8px var(--color-screen-glow);
 }
@@ -324,6 +339,11 @@ body > div:nth-of-type(2) {
 
 /* MARK: SIDE PANELS — verborgen op mobile/tablet */
 body > div:nth-of-type(2) > aside {
+  display: none;
+}
+
+/* Horizonscherm pas zichtbaar vanaf tabletformaat. */
+body > div:nth-of-type(2) > div:nth-of-type(5) {
   display: none;
 }
 
@@ -412,11 +432,11 @@ body > div:nth-of-type(2) > div:nth-of-type(2) > label:active {
   background: #505050;
 }
 
-/* c knop actief (cube mode) */
+/* Ronde knop actief: groene ring zodat je ziet welke functies aanstaan. */
 body
   > div:nth-of-type(2)
   > div:first-of-type
-  > label:nth-of-type(2):has(input:checked) {
+  > label:has(input:checked) {
   border-color: var(--color-screen);
   box-shadow: 0 0 8px var(--color-screen-glow);
 }
@@ -427,6 +447,29 @@ body > div:nth-of-type(2) > div:nth-of-type(2) > label:has(input:checked) {
   border-color: #ff880066;
   box-shadow: 0 0 8px #ff880033;
 }
+
+/* MARK: KEYPAD DISPLAY */
+/* Elke ingedrukte cijfertoets toont zijn cijfer groot op het hoofdscherm
+   (alleen zichtbaar als de Power-switch aanstaat). */
+body > div:first-of-type > div > div::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: "Quantico", Arial, sans-serif;
+  font-size: 4rem;
+}
+
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(1):active) body > div:first-of-type > div > div::after { content: "1"; }
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1):active)  body > div:first-of-type > div > div::after { content: "2"; }
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2):active)  body > div:first-of-type > div > div::after { content: "3"; }
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(2):active) body > div:first-of-type > div > div::after { content: "4"; }
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(3):active) body > div:first-of-type > div > div::after { content: "5"; }
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(4):active) body > div:first-of-type > div > div::after { content: "6"; }
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(5):active) body > div:first-of-type > div > div::after { content: "7"; }
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(6):active) body > div:first-of-type > div > div::after { content: "8"; }
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(7):active) body > div:first-of-type > div > div::after { content: "9"; }
 
 /* MARK: SWITCHES */
 /* https://www.w3schools.com/howto/howto_css_switch.asp */
@@ -451,10 +494,10 @@ body > div:nth-of-type(2) > div:nth-of-type(3) label {
 body > div:nth-of-type(2) > div:nth-of-type(3) label input {
   -webkit-appearance: none;
   appearance: none;
-  width: 52px;
-  height: 30px;
+  width: 3.25rem;
+  height: 1.875rem;
   border-radius: 999px;
-  border: 2px solid #5f5f5f;
+  border: 0.125rem solid #5f5f5f;
   background: var(--color-switch-bg);
   cursor: pointer;
   position: relative;
@@ -466,10 +509,10 @@ body > div:nth-of-type(2) > div:nth-of-type(3) label input {
 body > div:nth-of-type(2) > div:nth-of-type(3) label input::before {
   content: "";
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 22px;
-  height: 22px;
+  top: 0.125rem;
+  left: 0.125rem;
+  width: 1.375rem;
+  height: 1.375rem;
   border-radius: 50%;
   background: #fff;
   transition: transform 0.2s ease;
@@ -481,7 +524,7 @@ body > div:nth-of-type(2) > div:nth-of-type(3) label input:checked {
 }
 
 body > div:nth-of-type(2) > div:nth-of-type(3) label input:checked::before {
-  transform: translateX(22px);
+  transform: translateX(1.375rem);
 }
 
 /* cube en radar verborgen op klein scherm */
@@ -587,20 +630,6 @@ html:has(
   animation: emergency-flash 0.3s steps(2) infinite;
 }
 
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(1)
-      > input:checked
-  ):has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(2)
-      > input:checked
-  )
-
 /* Maak de titel feller rood en versnel de alarm-animatie. */
 html:has(
     body
@@ -702,7 +731,7 @@ html:has(
   bottom: 0;
   left: 0;
   right: 0;
-  height: 140px;
+  height: 8.75rem;
   pointer-events: none;
   z-index: 10;
   background-image:
@@ -710,7 +739,7 @@ html:has(
     url("assets/fire-svgrepo-com.svg"), url("assets/fire-svgrepo-com.svg"),
     url("assets/fire-svgrepo-com.svg");
   background-repeat: no-repeat;
-  background-size: 80px, 60px, 100px, 70px, 55px;
+  background-size: 5rem, 3.75rem, 6.25rem, 4.375rem, 3.4375rem;
   background-position:
     5% 100%,
     22% 100%,
@@ -722,11 +751,22 @@ html:has(
 }
 
 /* MARK: RESPONSIVE */
+/* Alle maten staan in rem; vanaf pc-formaat groeit de rem-basis mee met de
+   viewportbreedte zodat het hele paneel proportioneel opschaalt en op elke
+   schermbreedte dezelfde verhoudingen houdt.
+   100vw / 90 = 16px op een 1440px scherm, ~28px op een 2560px scherm;
+   max() voorkomt dat het tussen 1024px en 1440px kleiner wordt dan 16px. */
+@media (min-width: 1024px) {
+  html {
+    font-size: max(1rem, calc(100vw / 90));
+  }
+}
+
 /* Grotere behuizing en knoppen op bredere telefoons. */
 @media (min-width: 425px) {
   body > div:first-of-type {
-    width: 260px;
-    height: 280px;
+    width: 16.25rem;
+    height: 17.5rem;
     transform: rotateX(-55deg);
   }
 
@@ -766,8 +806,8 @@ html:has(
     top: 5rem;
     width: 8rem;
     height: 8rem;
-    border: 2px solid #4f6886;
-    border-radius: 1.5rem;
+    border: 1px solid #06080a;
+    border-radius: 0.9rem;
     pointer-events: none;
     transition: opacity 0.25s ease;
   }
@@ -779,28 +819,57 @@ html:has(
   }
 
   /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/conic-gradient */
+  /* MFD-look: donkere bezel met rijen knopjes rondom, blauwgrijs scherm met
+     het radarbeeld erin. Alle lagen worden met background-size/-position naar
+     het binnenste schermvlak geschaald zodat de bezel vrij blijft. */
   body > div:nth-of-type(2)::after {
+    top: 12rem;
     right: 1rem;
     opacity: 1;
     background:
       radial-gradient(
         circle at 68% 28%,
-        rgb(255 0 0 / var(--blip-opacity)) 3px,
-        rgb(255 0 0 / calc(var(--blip-opacity) * 0.3)) 7px,
-        transparent 9px
+        rgb(255 0 0 / var(--blip-opacity)) 0.1875rem,
+        rgb(255 0 0 / calc(var(--blip-opacity) * 0.3)) 0.4375rem,
+        transparent 0.5625rem
       ),
-      radial-gradient(circle, #8dff9c 4px, transparent 5px),
+      radial-gradient(circle, #8dff9c 0.25rem, transparent 0.3125rem),
       repeating-radial-gradient(
         circle,
-        transparent 0 18px,
-        #8dff9c33 19px 20px
+        transparent 0 1.125rem,
+        #8dff9c33 1.1875rem 1.25rem
       ),
       conic-gradient(
         from var(--radar-angle),
         transparent 0 320deg,
         #8dff9c99 0deg 360deg
       ),
-      #0f2b1a;
+      var(--mfd-scherm),
+      var(--mfd-knoppen-rij),
+      var(--mfd-knoppen-rij),
+      var(--mfd-knoppen-kolom),
+      var(--mfd-knoppen-kolom);
+    background-color: var(--mfd-frame);
+    background-size:
+      calc(100% - 2.4rem) calc(100% - 2.4rem),
+      calc(100% - 2.4rem) calc(100% - 2.4rem),
+      calc(100% - 2.4rem) calc(100% - 2.4rem),
+      calc(100% - 2.4rem) calc(100% - 2.4rem),
+      calc(100% - 2.4rem) calc(100% - 2.4rem),
+      calc(100% - 3rem) 0.4rem,
+      calc(100% - 3rem) 0.4rem,
+      0.4rem calc(100% - 3rem),
+      0.4rem calc(100% - 3rem);
+    background-position:
+      center,
+      center,
+      center,
+      center,
+      center,
+      top 0.4rem center,
+      bottom 0.4rem center,
+      left 0.4rem center,
+      right 0.4rem center;
     background-repeat: no-repeat;
     animation: none;
   }
@@ -818,10 +887,186 @@ html:has(
       radar-spin 2.5s linear infinite alternate-reverse,
       blip-pulse 5s linear infinite;
   }
+
+  /* MARK: STATUS SCHERM */
+  /* DED-uitlezing naast de ronde knoppen; gaat aan met de Power-switch,
+     de h-knop dimt hem. Smal gehouden zodat hij de knoppenrij nooit raakt. */
+  body > div:nth-of-type(2) > div:nth-of-type(5) {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 14rem;
+    height: 5.5rem;
+    padding: 0.4rem 0.6rem;
+    border: 2px solid #4f6886;
+    border-radius: 0.75rem;
+    background: #0a140c;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  body > div:nth-of-type(2) > div:nth-of-type(5) > ul {
+    list-style: none;
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    align-items: center;
+    font-family: "Quantico", "Courier New", monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: #8dff9c;
+    text-shadow: 0 0 4px #8dff9c99;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  body > div:nth-of-type(2) > div:nth-of-type(5) > ul > li {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Standaardwaarden van de uitlezing per ronde knop. */
+  body > div:nth-of-type(2) > div:nth-of-type(5) > ul > li::after {
+    content: "OFF";
+  }
+
+  /* Wolken staan standaard aan, snelheid standaard op normaal. */
+  body
+    > div:nth-of-type(2)
+    > div:nth-of-type(5)
+    > ul
+    > li:nth-of-type(3)::after {
+    content: "ON";
+  }
+
+  body
+    > div:nth-of-type(2)
+    > div:nth-of-type(5)
+    > ul
+    > li:nth-of-type(4)::after {
+    content: "NRM";
+  }
+
+  /* Actieve knoppen kleuren geel met hun nieuwe waarde, zoals in een echte DED. */
+  html:has(
+      body
+        > div:nth-of-type(2)
+        > div:first-of-type
+        > label:nth-of-type(1)
+        > input[type="checkbox"]:checked
+    )
+    body
+    > div:nth-of-type(2)
+    > div:nth-of-type(5)
+    > ul
+    > li:nth-of-type(1)::after {
+    content: "ON";
+    color: #ffe066;
+  }
+
+  html:has(
+      body
+        > div:nth-of-type(2)
+        > div:first-of-type
+        > label:nth-of-type(2)
+        > input[type="checkbox"]:checked
+    )
+    body
+    > div:nth-of-type(2)
+    > div:nth-of-type(5)
+    > ul
+    > li:nth-of-type(2)::after {
+    content: "ON";
+    color: #ffe066;
+  }
+
+  html:has(
+      body
+        > div:nth-of-type(2)
+        > div:first-of-type
+        > label:nth-of-type(3)
+        > input[type="checkbox"]:checked
+    )
+    body
+    > div:nth-of-type(2)
+    > div:nth-of-type(5)
+    > ul
+    > li:nth-of-type(3)::after {
+    content: "OFF";
+    color: #ffe066;
+  }
+
+  html:has(
+      body
+        > div:nth-of-type(2)
+        > div:first-of-type
+        > label:nth-of-type(4)
+        > input[type="checkbox"]:checked
+    )
+    body
+    > div:nth-of-type(2)
+    > div:nth-of-type(5)
+    > ul
+    > li:nth-of-type(4)::after {
+    content: "FST";
+    color: #ffe066;
+  }
+
+  html:has(
+      body
+        > div:nth-of-type(2)
+        > div:first-of-type
+        > label:nth-of-type(5)
+        > input[type="checkbox"]:checked
+    )
+    body
+    > div:nth-of-type(2)
+    > div:nth-of-type(5)
+    > ul
+    > li:nth-of-type(5)::after {
+    content: "ON";
+    color: #ffe066;
+  }
+
+  /* Power-switch zet de DED-uitlezing aan, net als het hoofdscherm. */
+  html:has(
+      body
+        > div:nth-of-type(2)
+        > div:nth-of-type(3)
+        > label:nth-of-type(2)
+        > input[type="checkbox"]:checked
+    )
+    body
+    > div:nth-of-type(2)
+    > div:nth-of-type(5)
+    > ul {
+    opacity: 1;
+  }
+
+  /* h-knop dimt de uitlezing weer, ook als de stroom aanstaat. */
+  html:has(
+      body
+        > div:nth-of-type(2)
+        > div:first-of-type
+        > label:nth-of-type(6)
+        > input[type="checkbox"]:checked
+    )
+    body
+    > div:nth-of-type(2)
+    > div:nth-of-type(5)
+    > ul {
+    opacity: 0;
+  }
 }
 
 /* Desktop: zijpanelen aan, button box smaller. */
 @media (min-width: 1024px) {
+  /* Minder lucht boven het paneel zodat de switch-labels onderin leesbaar blijven. */
+  body {
+    padding-top: 2.5rem;
+  }
+
   body > div:nth-of-type(2)::before {
     left: 1rem;
   }
@@ -835,7 +1080,7 @@ html:has(
     flex: 1;
     padding-left: 9rem;
     padding-right: 9rem;
-    perspective: 900px;
+    perspective: 56.25rem;
     transform-style: preserve-3d;
   }
 
@@ -881,6 +1126,99 @@ html:has(
       ),
       linear-gradient(to left, #141414, #1e1e1e);
   }
+}
+
+/* MARK: RONDE KNOP FUNCTIES */
+/* w: wolken uit. */
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:first-of-type
+      > label:nth-of-type(3)
+      > input[type="checkbox"]:checked
+  )
+  body::before {
+  display: none;
+}
+
+/* s: speed — kubussen, radar en wolken draaien sneller. */
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:first-of-type
+      > label:nth-of-type(4)
+      > input[type="checkbox"]:checked
+  )
+  body
+  > div:first-of-type
+  > div
+  > div
+  > div
+  > div,
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:first-of-type
+      > label:nth-of-type(4)
+      > input[type="checkbox"]:checked
+  )
+  body
+  > div:nth-of-type(2)
+  > div:nth-of-type(4)
+  > div {
+  animation-duration: 1.2s;
+}
+
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:first-of-type
+      > label:nth-of-type(4)
+      > input[type="checkbox"]:checked
+  )
+  body
+  > div:nth-of-type(2)::after {
+  animation-duration: 1s, 2.5s;
+}
+
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:first-of-type
+      > label:nth-of-type(4)
+      > input[type="checkbox"]:checked
+  )
+  body::before {
+  animation-duration: 3s, 3s, 3s, 3s;
+}
+
+/* l: keypadverlichting — alle toetsen krijgen groene backlight. */
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:first-of-type
+      > label:nth-of-type(5)
+      > input[type="checkbox"]:checked
+  )
+  body
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  > button,
+html:has(
+    body
+      > div:nth-of-type(2)
+      > div:first-of-type
+      > label:nth-of-type(5)
+      > input[type="checkbox"]:checked
+  )
+  body
+  > div:nth-of-type(2)
+  > div:nth-of-type(2)
+  > label {
+  color: #8dff9c;
+  border-color: #8dff9c88;
+  text-shadow: 0 0 6px #8dff9c;
+  box-shadow: 0 0 10px #8dff9c44;
 }
 
 /* MARK: ANIMATIES */
