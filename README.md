@@ -198,71 +198,99 @@ als ik meer tijd had dan zou ik nog meer gaan doen aan de styling bijvoorbeeld e
 ## bronnen 
 
 **font**
-https://fontsource.org/fonts/quantico
-https://fontsource.org/fonts/orbitron
+- https://fontsource.org/fonts/quantico
+- https://fontsource.org/fonts/orbitron
 
 **clip-path behuizing**
-https://bennettfeely.com/clippy/
-https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
+- https://bennettfeely.com/clippy/ (tool waarmee de clip-path van de behuizing is gemaakt)
+- https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
+
+**border-radius behuizing (slash-syntax)**
+- https://9elements.com/blog/css-border-radius-can-do-that/ (artikel: uitleg over de `/` in border-radius voor ovale hoeken)
+- https://9elements.github.io/fancy-border-radius/ (tool om organische border-radius vormen te maken)
 
 **::before en ::after**
-https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::before
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::before
+
+**3D cube / transforms / perspective**
+- https://3dtransforms.desandro.com/cube (artikel: stap-voor-stap uitleg van een 3D cube met preserve-3d, de basis voor mijn cube)
+- https://www.youtube.com/playlist?list=PL4-IK0AVhVjMsQyJM3oF1Ij2uoQ0sSDoE (video's: 3D CSS serie van Kevin Powell)
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Transforms/Using
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/perspective
 
 **gradients**
-https://www.youtube.com/watch?v=cWgb42tUYPA
-https://www.youtube.com/watch?v=XMEX9_HvW2k&t=2s
-https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/conic-gradient
-https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/radial-gradient
-https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/repeating-radial-gradient
+- https://www.youtube.com/watch?v=cWgb42tUYPA (video)
+- https://www.youtube.com/watch?v=XMEX9_HvW2k&t=2s (video)
+- https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/conic-gradient
+- https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/radial-gradient
+- https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/repeating-radial-gradient
+- https://www.smashingmagazine.com/2022/01/css-radial-conic-gradient/ (artikel: deep dive in radial en conic gradients, handig voor de radar-lagen)
 
 **radar animatie**
-gevraagd aan claude waarom hij eerst niet de juiste richting op spinde gaat over de radar animatie die spinde eerst via de onderkant
+- https://csswolf.com/radar-scanner-animation-effect-in-css-no-js/ (artikel: radar-scanner met conic-gradient, zonder JS)
+- gevraagd aan claude waarom hij eerst niet de juiste richting op spinde gaat over de radar animatie die spinde eerst via de onderkant
 https://claude.ai/share/554724a1-56f7-4cd3-8fe9-bd73e5369f5e
 
-**toggle switch / :checked / appearance**
-https://www.w3schools.com/howto/howto_css_switch.asp
-https://developer.mozilla.org/en-US/docs/Web/CSS/:checked
-https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
+**glitch titel (clip-path + pseudo-elementen)**
+- https://dev.to/kerthin/how-create-pure-css-glitch-effect-530p (artikel: glitch-effect met twee tekstkopieën en clip-path)
+- https://www.cssportal.com/css-glitch-text-effect/ (uitleg + generator voor glitch-tekst)
+- https://css-tricks.com/how-to-create-neon-text-with-css/ (artikel: neon-glow met gestapelde text-shadows, gebruikt voor titel en nightmode)
 
-**:has() selector**
-https://developer.mozilla.org/en-US/docs/Web/CSS/:has
-https://www.joshwcomeau.com/css/has/
+**wolken (meerdere background-images animeren)**
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Backgrounds_and_borders/Using_multiple_backgrounds
+- https://davidwalsh.name/multiple-background-css-animations (artikel: meerdere achtergrondlagen apart animeren)
+- https://css-irl.info/quick-tip-negative-animation-delay/ (artikel: negatieve animation-delay zodat wolken halverwege hun route starten)
+
+**toggle switch / :checked / appearance**
+- https://www.w3schools.com/howto/howto_css_switch.asp
+- https://developer.mozilla.org/en-US/docs/Web/CSS/:checked
+- https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
+- https://alvaromontoro.com/blog/68017/creating-a-css-only-toggle-switch (artikel: switch op de input zelf met appearance: none, zoals mijn switches)
+
+**:has() selector / checkbox hack (knoppen zonder JS)**
+- https://developer.mozilla.org/en-US/docs/Web/CSS/:has
+- https://www.joshwcomeau.com/css/has/ (artikel)
+- https://css-tricks.com/the-checkbox-hack/ (artikel: het idee achter state bijhouden met checkboxes in pure CSS)
 
 **:not() selector**
-https://developer.mozilla.org/en-US/docs/Web/CSS/:not
+- https://developer.mozilla.org/en-US/docs/Web/CSS/:not
 
 **container style queries**
-https://ishadeed.com/article/css-container-style-queries/
-https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_size_and_style_queries
+- https://ishadeed.com/article/css-container-style-queries/ (artikel)
+- https://una.im/style-queries/ (artikel: praktische voorbeelden van style() queries met custom properties)
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_size_and_style_queries
 
 **CSS custom properties (variabelen)**
-https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+- https://www.youtube.com/watch?v=40K1pvxEwlE (video: Master CSS Custom Properties — Kevin Powell)
 
-**@property**
-https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property
+**@property (variabelen animeren)**
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property
+- https://css-tricks.com/exploring-property-and-its-animating-powers/ (artikel: waarom je @property nodig hebt om custom properties zoals --radar-angle te animeren)
 
 **clamp() / responsive typography**
-https://developer.mozilla.org/en-US/docs/Web/CSS/clamp
+- https://developer.mozilla.org/en-US/docs/Web/CSS/clamp
+- https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/ (artikel: fluid typography met clamp(), gebruikt voor de titel)
 
 **aspect-ratio**
-https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
+- https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
 
-**3D transforms**
-https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Transforms/Using
-https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/perspective
+**@keyframes / steps() / animation-delay**
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@keyframes
+- https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/easing-function/steps
+- https://css-tricks.com/almanac/functions/s/steps/ (artikel: steps() voor schokkerige animaties zoals het alarm en de glitch)
+- https://www.joshwcomeau.com/animation/keyframe-animations/ (interactief artikel over keyframe-animaties)
+- https://css-tricks.com/css-animation-tricks/ (artikel: animation tricks zoals negatieve delays en state jumping)
 
-**@keyframes / steps()**
-https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@keyframes
-https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/easing-function/steps
-
-**algemeen**
-https://codepen.io/shooft/pen/PoOXLoZ
-
+**algemene bronnen**
+- https://developer.mozilla.org/en-US/docs/Web/CSS (MDN: naslagwerk voor alle CSS-properties)
+- https://css-tricks.com/ (artikelen en almanac over zo'n beetje elke CSS-techniek)
+- https://web.dev/learn/css (gratis CSS-cursus van Google)
+- https://www.youtube.com/@KevinPowell (video's: CSS-uitleg over bijna elk onderwerp)
+- https://www.joshwcomeau.com/ (interactieve artikelen over CSS en animaties)
+- https://codepen.io/shooft/pen/PoOXLoZ
 
 **SVG**
-
-https://www.svgrepo.com/svg/352014/fighter-jet
-
-https://www.svgrepo.com/svg/506715/fire
-
-https://www.svgrepo.com/svg/528176/cloud
+- https://www.svgrepo.com/svg/352014/fighter-jet
+- https://www.svgrepo.com/svg/506715/fire
+- https://www.svgrepo.com/svg/528176/cloud

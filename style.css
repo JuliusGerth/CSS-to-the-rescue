@@ -35,40 +35,65 @@
   --color-keypad-button-bg: #6f6f6f;
 
   --color-switch-bg: #7e7c7a;
-  --color-switch-stick-bg: #888;
 
-  /* Gedeelde MFD-housing voor cube-box en radar: frame, scherm en knopjes. */
+  /* Gedeelde MFD-housing voor de cube-box (cube.css) en de radar. */
   --mfd-frame: #17191c;
   --mfd-scherm: linear-gradient(#22303c, #101a22);
-  --mfd-knoppen-rij: repeating-linear-gradient(
-    to right,
-    #62686e 0 0.4rem,
-    transparent 0.4rem 0.75rem
-  );
-  --mfd-knoppen-kolom: repeating-linear-gradient(
-    to bottom,
-    #62686e 0 0.4rem,
-    transparent 0.4rem 0.75rem
-  );
 }
 
+/* MARK: KNOP VARIABELEN */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/:has */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_size_and_style_queries */
-/* html fungeert als container zodat de @container style() nightmode-query werkt. */
+/* https://css-tricks.com/the-checkbox-hack/ */
+/* https://una.im/style-queries/ */
+/* html fungeert als container en vertaalt elke knop naar één variabele;
+   de rest van de css leest die met @container style() queries, zodat de
+   lange html:has()-selectors maar één keer nodig zijn. */
 html {
   --night: false;
+  --cube: false;
+  --wolken-uit: false;
+  --fast: false;
+  --licht: false;
+  --dim: false;
+  --power: false;
+  --radar: false;
+  --emergency: false;
   container-type: normal;
 }
 
-/* Zet --night op true als de n-knop is ingedrukt. */
-html:has(
-  body
-    > div:nth-of-type(2)
-    > div:first-of-type
-    > label:nth-of-type(1)
-    > input[type="checkbox"]:checked
-) {
+/* Ronde knoppen: n, c, w, s, l en h. */
+html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(1) > input:checked) {
   --night: true;
+}
+html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(2) > input:checked) {
+  --cube: true;
+}
+html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(3) > input:checked) {
+  --wolken-uit: true;
+}
+html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(4) > input:checked) {
+  --fast: true;
+}
+html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(5) > input:checked) {
+  --licht: true;
+}
+html:has(body > div:nth-of-type(2) > div:first-of-type > label:nth-of-type(6) > input:checked) {
+  --dim: true;
+}
+
+/* Toggle switches: 2 = power, 3 = radar. */
+html:has(body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(2) > input:checked) {
+  --power: true;
+}
+html:has(body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(3) > input:checked) {
+  --radar: true;
+}
+
+/* Emergency mode: keypad-knop 2 én 3 tegelijk ingedrukt. */
+/* https://www.joshwcomeau.com/css/has/ */
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1) > input:checked):has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) {
+  --emergency: true;
 }
 
 /* MARK: LAYOUT */
@@ -86,6 +111,10 @@ body {
 }
 
 /* MARK: WOLKEN */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Backgrounds_and_borders/Using_multiple_backgrounds */
+/* https://davidwalsh.name/multiple-background-css-animations */
+/* negatieve animation-delay (-3.5s) laat wolk 2 en 4 halverwege hun route starten:
+   https://css-irl.info/quick-tip-negative-animation-delay/ */
 body::before {
   content: "";
   position: absolute;
@@ -112,6 +141,8 @@ body::before {
 }
 
 /* MARK: TITEL */
+/* https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/ */
+/* https://css-tricks.com/how-to-create-neon-text-with-css/ */
 body > h1:first-of-type {
   margin-bottom: 0.5rem;
   position: relative;
@@ -127,6 +158,8 @@ body > h1:first-of-type {
 }
 
 /* Twee gekleurde kopieën van de tekst die sporadisch glitchen met clip-path. */
+/* https://dev.to/kerthin/how-create-pure-css-glitch-effect-530p */
+/* https://www.cssportal.com/css-glitch-text-effect/ */
 body > h1:first-of-type::before,
 body > h1:first-of-type::after {
   content: "AFTERBURNER";
@@ -182,6 +215,9 @@ body > div:first-of-type > div {
   border-left: 0.625rem solid var(--color-housing-algemeen);
   border-right: 0.625rem solid var(--color-housing-algemeen);
   border-bottom: 1.125rem solid var(--color-housing-algemeen);
+  /* border-radius met slash-syntax (horizontale / verticale stralen):
+     https://9elements.com/blog/css-border-radius-can-do-that/
+     https://9elements.github.io/fancy-border-radius/ */
   border-radius: 7.5rem 7.5rem 1.25rem 1.25rem / 3.125rem 3.125rem 1.875rem
     1.875rem;
   transform-style: preserve-3d;
@@ -201,21 +237,14 @@ body > div:first-of-type > div > div {
 }
 
 /* Power switch zet scherm aan */
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(3)
-      > label:nth-of-type(2)
-      > input[type="checkbox"]:checked
-  )
-  body
-  > div:first-of-type
-  > div
-  > div {
-  opacity: 1;
+@container style(--power:true) {
+  body > div:first-of-type > div > div {
+    opacity: 1;
+  }
 }
 
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Transforms/Using */
+/* https://3dtransforms.desandro.com/cube */
 /* MARK: CUBE IN BEHUIZING */
 body > div:first-of-type > div > div > div {
   position: absolute;
@@ -228,34 +257,14 @@ body > div:first-of-type > div > div > div {
 }
 
 /* Toon de kubus en verberg de meetdata als de c-knop actief is. */
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:first-of-type
-      > label:nth-of-type(2)
-      > input:checked
-  )
-  body
-  > div:first-of-type
-  > div
-  > div
-  > div {
-  opacity: 1;
-}
+@container style(--cube:true) {
+  body > div:first-of-type > div > div > div {
+    opacity: 1;
+  }
 
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:first-of-type
-      > label:nth-of-type(2)
-      > input:checked
-  )
-  body
-  > div:first-of-type
-  > div
-  > div
-  > ol {
-  opacity: 0;
+  body > div:first-of-type > div > div > ol {
+    opacity: 0;
+  }
 }
 
 body > div:first-of-type > div > div > div > div {
@@ -355,7 +364,7 @@ body > div:nth-of-type(2) > div:nth-of-type(2) > label {
   transition: background 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
 }
 
-/* RONDE BUTTONS */
+/* MARK: RONDE BUTTONS */
 body > div:nth-of-type(2) > div:first-of-type {
   display: flex;
   justify-content: center;
@@ -394,7 +403,7 @@ body > div:nth-of-type(2) > div:first-of-type > button {
   justify-content: center;
 }
 
-/* 9 BUTTONS */
+/* MARK: KEYPAD BUTTONS */
 body > div:nth-of-type(2) > div:nth-of-type(2) {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -423,7 +432,7 @@ body > div:nth-of-type(2) > div:nth-of-type(2) > label > input {
   display: none;
 }
 
-/* klik feedback */
+/* MARK: KNOP FEEDBACK (klik + actief) */
 body > div:nth-of-type(2) > div:first-of-type > button:active,
 body > div:nth-of-type(2) > div:first-of-type > label:active,
 body > div:nth-of-type(2) > div:nth-of-type(2) > button:active,
@@ -474,6 +483,8 @@ html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(7):
 /* MARK: SWITCHES */
 /* https://www.w3schools.com/howto/howto_css_switch.asp */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/:checked */
+/* appearance: none om de native checkbox-styling te strippen:
+   https://alvaromontoro.com/blog/68017/creating-a-css-only-toggle-switch */
 body > div:nth-of-type(2) > div:nth-of-type(3) {
   display: flex;
   justify-content: center;
@@ -610,158 +621,14 @@ body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(3) {
   }
 }
 
-/* MARK: EMERGENCY MODE */
-/* https://www.joshwcomeau.com/css/has/ */
-/* Activeert als knop 2 én knop 3 tegelijk zijn ingedrukt. */
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(1)
-      > input:checked
-  ):has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(2)
-      > input:checked
-  )
-  body {
-  animation: emergency-flash 0.3s steps(2) infinite;
-}
-
-/* Maak de titel feller rood en versnel de alarm-animatie. */
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(1)
-      > input:checked
-  ):has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(2)
-      > input:checked
-  )
-  body
-  > h1 {
-  animation: title-alarm 0.15s steps(2) infinite;
-  color: #ff0000;
-  text-shadow:
-    0 0 8px #ff0000,
-    0 0 30px #ff000099;
-}
-
-/* Donkerrode achtergrond voor de button box. */
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(1)
-      > input:checked
-  ):has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(2)
-      > input:checked
-  )
-  body
-  > div:nth-of-type(2) {
-  background-color: #1a0000;
-}
-
-/* Rode gloed op alle knoppen in emergency mode. */
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(1)
-      > input:checked
-  ):has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(2)
-      > input:checked
-  )
-  body
-  > div:nth-of-type(2)
-  button,
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(1)
-      > input:checked
-  ):has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(2)
-      > input:checked
-  )
-  body
-  > div:nth-of-type(2)
-  > div:nth-of-type(2)
-  label {
-  color: #ff4444;
-  text-shadow: 0 0 6px #ff4444;
-  box-shadow: inset 0 0 8px #ff222233;
-}
-
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(1)
-      > input:checked
-  ):has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(2)
-      > input:checked
-  )
-  /* Vijf vuurvlammen onderaan het scherm via body::after en de fire SVG. */
-  body::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 8.75rem;
-  pointer-events: none;
-  z-index: 10;
-  background-image:
-    url("assets/fire-svgrepo-com.svg"), url("assets/fire-svgrepo-com.svg"),
-    url("assets/fire-svgrepo-com.svg"), url("assets/fire-svgrepo-com.svg"),
-    url("assets/fire-svgrepo-com.svg");
-  background-repeat: no-repeat;
-  background-size: 5rem, 3.75rem, 6.25rem, 4.375rem, 3.4375rem;
-  background-position:
-    5% 100%,
-    22% 100%,
-    50% 100%,
-    78% 100%,
-    95% 100%;
-  transform-origin: bottom center;
-  animation: fire-flicker 0.25s steps(2) infinite alternate;
-}
-
 /* MARK: RESPONSIVE */
-/* Alle maten staan in rem; vanaf pc-formaat groeit de rem-basis mee met de
-   viewportbreedte zodat het hele paneel proportioneel opschaalt en op elke
-   schermbreedte dezelfde verhoudingen houdt.
-   100vw / 90 = 16px op een 1440px scherm, ~28px op een 2560px scherm;
-   max() voorkomt dat het tussen 1024px en 1440px kleiner wordt dan 16px. */
 @media (min-width: 1024px) {
   html {
     font-size: max(1rem, calc(100vw / 90));
   }
 }
 
+/* MARK: RESPONSIVE — BREDE TELEFOON */
 /* Grotere behuizing en knoppen op bredere telefoons. */
 @media (min-width: 425px) {
   body > div:first-of-type {
@@ -786,6 +653,7 @@ html:has(
   }
 }
 
+/* MARK: RESPONSIVE — TABLET */
 /* Tablet: radarscherm en extra paneel zichtbaar, cube- en radarswitch terug. */
 @media (min-width: 768px) {
   body {
@@ -797,15 +665,15 @@ html:has(
     display: inline-flex;
   }
 
-  /* no extra padding needed — side panels handle the visual width */
-
+  /* MARK: MFD BOXEN */
+  /* Gedeelde maat en vorm voor de cube-box (links) en de radar (rechts). */
   body > div:nth-of-type(2)::before,
   body > div:nth-of-type(2)::after {
     content: "";
     position: absolute;
     top: 5rem;
-    width: 8rem;
-    height: 8rem;
+    width: 12rem;
+    height: 12rem;
     border: 1px solid #06080a;
     border-radius: 0.9rem;
     pointer-events: none;
@@ -818,12 +686,15 @@ html:has(
     opacity: 0;
   }
 
+  /* MARK: RADAR */
   /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/conic-gradient */
-  /* MFD-look: donkere bezel met rijen knopjes rondom, blauwgrijs scherm met
-     het radarbeeld erin. Alle lagen worden met background-size/-position naar
-     het binnenste schermvlak geschaald zodat de bezel vrij blijft. */
+  /* https://csswolf.com/radar-scanner-animation-effect-in-css-no-js/ */
+  /* https://www.smashingmagazine.com/2022/01/css-radial-conic-gradient/ */
+  /* MFD-look: donkere bezel met blauwgrijs scherm en het radarbeeld erin.
+     Alle lagen worden met background-size/-position naar het binnenste
+     schermvlak geschaald zodat de bezel vrij blijft. */
   body > div:nth-of-type(2)::after {
-    top: 12rem;
+    top: 8rem;
     right: 1rem;
     opacity: 1;
     background:
@@ -844,48 +715,21 @@ html:has(
         transparent 0 320deg,
         #8dff9c99 0deg 360deg
       ),
-      var(--mfd-scherm),
-      var(--mfd-knoppen-rij),
-      var(--mfd-knoppen-rij),
-      var(--mfd-knoppen-kolom),
-      var(--mfd-knoppen-kolom);
+      var(--mfd-scherm);
     background-color: var(--mfd-frame);
-    background-size:
-      calc(100% - 2.4rem) calc(100% - 2.4rem),
-      calc(100% - 2.4rem) calc(100% - 2.4rem),
-      calc(100% - 2.4rem) calc(100% - 2.4rem),
-      calc(100% - 2.4rem) calc(100% - 2.4rem),
-      calc(100% - 2.4rem) calc(100% - 2.4rem),
-      calc(100% - 3rem) 0.4rem,
-      calc(100% - 3rem) 0.4rem,
-      0.4rem calc(100% - 3rem),
-      0.4rem calc(100% - 3rem);
-    background-position:
-      center,
-      center,
-      center,
-      center,
-      center,
-      top 0.4rem center,
-      bottom 0.4rem center,
-      left 0.4rem center,
-      right 0.4rem center;
+    /* één maat en positie geldt voor alle lagen */
+    background-size: calc(100% - 2.4rem) calc(100% - 2.4rem);
+    background-position: center;
     background-repeat: no-repeat;
     animation: none;
   }
 
-  html:has(
-      body
-        > div:nth-of-type(2)
-        > div:nth-of-type(3)
-        > label:nth-of-type(3)
-        > input[type="checkbox"]:checked
-    )
-    body
-    > div:nth-of-type(2)::after {
-    animation:
-      radar-spin 2.5s linear infinite alternate-reverse,
-      blip-pulse 5s linear infinite;
+  @container style(--radar:true) {
+    body > div:nth-of-type(2)::after {
+      animation:
+        radar-spin 2.5s linear infinite alternate-reverse,
+        blip-pulse 5s linear infinite;
+    }
   }
 
   /* MARK: STATUS SCHERM */
@@ -949,117 +793,57 @@ html:has(
   }
 
   /* Actieve knoppen kleuren geel met hun nieuwe waarde, zoals in een echte DED. */
-  html:has(
-      body
-        > div:nth-of-type(2)
-        > div:first-of-type
-        > label:nth-of-type(1)
-        > input[type="checkbox"]:checked
-    )
-    body
-    > div:nth-of-type(2)
-    > div:nth-of-type(5)
-    > ul
-    > li:nth-of-type(1)::after {
-    content: "ON";
-    color: #ffe066;
+  @container style(--night:true) {
+    body > div:nth-of-type(2) > div:nth-of-type(5) > ul > li:nth-of-type(1)::after {
+      content: "ON";
+      color: #ffe066;
+    }
   }
 
-  html:has(
-      body
-        > div:nth-of-type(2)
-        > div:first-of-type
-        > label:nth-of-type(2)
-        > input[type="checkbox"]:checked
-    )
-    body
-    > div:nth-of-type(2)
-    > div:nth-of-type(5)
-    > ul
-    > li:nth-of-type(2)::after {
-    content: "ON";
-    color: #ffe066;
+  @container style(--cube:true) {
+    body > div:nth-of-type(2) > div:nth-of-type(5) > ul > li:nth-of-type(2)::after {
+      content: "ON";
+      color: #ffe066;
+    }
   }
 
-  html:has(
-      body
-        > div:nth-of-type(2)
-        > div:first-of-type
-        > label:nth-of-type(3)
-        > input[type="checkbox"]:checked
-    )
-    body
-    > div:nth-of-type(2)
-    > div:nth-of-type(5)
-    > ul
-    > li:nth-of-type(3)::after {
-    content: "OFF";
-    color: #ffe066;
+  @container style(--wolken-uit:true) {
+    body > div:nth-of-type(2) > div:nth-of-type(5) > ul > li:nth-of-type(3)::after {
+      content: "OFF";
+      color: #ffe066;
+    }
   }
 
-  html:has(
-      body
-        > div:nth-of-type(2)
-        > div:first-of-type
-        > label:nth-of-type(4)
-        > input[type="checkbox"]:checked
-    )
-    body
-    > div:nth-of-type(2)
-    > div:nth-of-type(5)
-    > ul
-    > li:nth-of-type(4)::after {
-    content: "FST";
-    color: #ffe066;
+  @container style(--fast:true) {
+    body > div:nth-of-type(2) > div:nth-of-type(5) > ul > li:nth-of-type(4)::after {
+      content: "FST";
+      color: #ffe066;
+    }
   }
 
-  html:has(
-      body
-        > div:nth-of-type(2)
-        > div:first-of-type
-        > label:nth-of-type(5)
-        > input[type="checkbox"]:checked
-    )
-    body
-    > div:nth-of-type(2)
-    > div:nth-of-type(5)
-    > ul
-    > li:nth-of-type(5)::after {
-    content: "ON";
-    color: #ffe066;
+  @container style(--licht:true) {
+    body > div:nth-of-type(2) > div:nth-of-type(5) > ul > li:nth-of-type(5)::after {
+      content: "ON";
+      color: #ffe066;
+    }
   }
 
   /* Power-switch zet de DED-uitlezing aan, net als het hoofdscherm. */
-  html:has(
-      body
-        > div:nth-of-type(2)
-        > div:nth-of-type(3)
-        > label:nth-of-type(2)
-        > input[type="checkbox"]:checked
-    )
-    body
-    > div:nth-of-type(2)
-    > div:nth-of-type(5)
-    > ul {
-    opacity: 1;
+  @container style(--power:true) {
+    body > div:nth-of-type(2) > div:nth-of-type(5) > ul {
+      opacity: 1;
+    }
   }
 
   /* h-knop dimt de uitlezing weer, ook als de stroom aanstaat. */
-  html:has(
-      body
-        > div:nth-of-type(2)
-        > div:first-of-type
-        > label:nth-of-type(6)
-        > input[type="checkbox"]:checked
-    )
-    body
-    > div:nth-of-type(2)
-    > div:nth-of-type(5)
-    > ul {
-    opacity: 0;
+  @container style(--dim:true) {
+    body > div:nth-of-type(2) > div:nth-of-type(5) > ul {
+      opacity: 0;
+    }
   }
 }
 
+/* MARK: RESPONSIVE — DESKTOP */
 /* Desktop: zijpanelen aan, button box smaller. */
 @media (min-width: 1024px) {
   /* Minder lucht boven het paneel zodat de switch-labels onderin leesbaar blijven. */
@@ -1130,100 +914,100 @@ html:has(
 
 /* MARK: RONDE KNOP FUNCTIES */
 /* w: wolken uit. */
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:first-of-type
-      > label:nth-of-type(3)
-      > input[type="checkbox"]:checked
-  )
+@container style(--wolken-uit:true) {
   body::before {
-  display: none;
+    display: none;
+  }
 }
 
-/* s: speed — kubussen, radar en wolken draaien sneller. */
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:first-of-type
-      > label:nth-of-type(4)
-      > input[type="checkbox"]:checked
-  )
-  body
-  > div:first-of-type
-  > div
-  > div
-  > div
-  > div,
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:first-of-type
-      > label:nth-of-type(4)
-      > input[type="checkbox"]:checked
-  )
-  body
-  > div:nth-of-type(2)
-  > div:nth-of-type(4)
-  > div {
-  animation-duration: 1.2s;
-}
+/* s: speed — kubus, radar en wolken draaien sneller.
+   (De cube-box heeft zijn eigen --fast regel in cube.css.) */
+@container style(--fast:true) {
+  body > div:first-of-type > div > div > div > div {
+    animation-duration: 1.2s;
+  }
 
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:first-of-type
-      > label:nth-of-type(4)
-      > input[type="checkbox"]:checked
-  )
-  body
-  > div:nth-of-type(2)::after {
-  animation-duration: 1s, 2.5s;
-}
+  body > div:nth-of-type(2)::after {
+    animation-duration: 1s, 2.5s;
+  }
 
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:first-of-type
-      > label:nth-of-type(4)
-      > input[type="checkbox"]:checked
-  )
   body::before {
-  animation-duration: 3s, 3s, 3s, 3s;
+    animation-duration: 3s;
+  }
 }
 
 /* l: keypadverlichting — alle toetsen krijgen groene backlight. */
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:first-of-type
-      > label:nth-of-type(5)
-      > input[type="checkbox"]:checked
-  )
-  body
-  > div:nth-of-type(2)
-  > div:nth-of-type(2)
-  > button,
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:first-of-type
-      > label:nth-of-type(5)
-      > input[type="checkbox"]:checked
-  )
-  body
-  > div:nth-of-type(2)
-  > div:nth-of-type(2)
-  > label {
-  color: #8dff9c;
-  border-color: #8dff9c88;
-  text-shadow: 0 0 6px #8dff9c;
-  box-shadow: 0 0 10px #8dff9c44;
+@container style(--licht:true) {
+  body > div:nth-of-type(2) > div:nth-of-type(2) > button,
+  body > div:nth-of-type(2) > div:nth-of-type(2) > label {
+    color: #8dff9c;
+    border-color: #8dff9c88;
+    text-shadow: 0 0 6px #8dff9c;
+    box-shadow: 0 0 10px #8dff9c44;
+  }
+}
+
+/* MARK: EMERGENCY MODE */
+/* Staat als laatste zodat hij nightmode en de keypadverlichting overschrijft. */
+@container style(--emergency:true) {
+  body {
+    animation: emergency-flash 0.3s steps(2) infinite;
+  }
+
+  /* Maak de titel feller rood en versnel de alarm-animatie. */
+  body > h1:first-of-type {
+    animation: title-alarm 0.15s steps(2) infinite;
+    color: #ff0000;
+    text-shadow:
+      0 0 8px #ff0000,
+      0 0 30px #ff000099;
+  }
+
+  /* Donkerrode achtergrond voor de button box. */
+  body > div:nth-of-type(2) {
+    background-color: #1a0000;
+  }
+
+  /* Rode gloed op alle knoppen. */
+  body > div:nth-of-type(2) > div:first-of-type > button,
+  body > div:nth-of-type(2) > div:nth-of-type(2) > button,
+  body > div:nth-of-type(2) > div:nth-of-type(2) > label {
+    color: #ff4444;
+    text-shadow: 0 0 6px #ff4444;
+    box-shadow: inset 0 0 8px #ff222233;
+  }
+
+  /* Vijf vuurvlammen onderaan het scherm via body::after en de fire SVG. */
+  body::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8.75rem;
+    pointer-events: none;
+    z-index: 10;
+    background-image:
+      url("assets/fire-svgrepo-com.svg"), url("assets/fire-svgrepo-com.svg"),
+      url("assets/fire-svgrepo-com.svg"), url("assets/fire-svgrepo-com.svg"),
+      url("assets/fire-svgrepo-com.svg");
+    background-repeat: no-repeat;
+    background-size: 5rem, 3.75rem, 6.25rem, 4.375rem, 3.4375rem;
+    background-position:
+      5% 100%,
+      22% 100%,
+      50% 100%,
+      78% 100%,
+      95% 100%;
+    transform-origin: bottom center;
+    animation: fire-flicker 0.25s steps(2) infinite alternate;
+  }
 }
 
 /* MARK: ANIMATIES */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@keyframes */
+/* https://css-tricks.com/exploring-property-and-its-animating-powers/ */
 /* @property maakt het mogelijk om CSS-variabelen te animeren met keyframes. */
 @property --radar-angle {
   syntax: "<angle>";
@@ -1297,6 +1081,8 @@ html:has(
 /* MARK: ANIMATIES — TITEL */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function/steps */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path */
+/* https://css-tricks.com/almanac/functions/s/steps/ */
+/* https://www.joshwcomeau.com/animation/keyframe-animations/ */
 @keyframes title-flyin {
   0% {
     transform: translateX(-120vw) translateY(10px) rotate(-8deg) scale(0.9);
@@ -1366,18 +1152,6 @@ html:has(
   }
   to {
     background-color: #110000;
-  }
-}
-
-/* Rode gloed pulseert van intens naar zwak (momenteel niet in gebruik). */
-@keyframes emergency-glow {
-  from {
-    box-shadow:
-      0 0 25px #ff0000,
-      0 0 60px #ff000066;
-  }
-  to {
-    box-shadow: 0 0 6px #ff3333;
   }
 }
 

@@ -1,37 +1,27 @@
+/* 3D cube opgebouwd volgens de uitleg van David DeSandro:
+   https://3dtransforms.desandro.com/cube
+   en de 3D CSS videoserie van Kevin Powell:
+   https://www.youtube.com/playlist?list=PL4-IK0AVhVjMsQyJM3oF1Ij2uoQ0sSDoE */
 @media (min-width: 768px) {
+  /* MARK: CUBE BOX */
   /* MFD-housing: zelfde maat en hoogte als de radar zodat links en rechts
-     uitgelijnd zijn; frame en knopjes komen uit de gedeelde --mfd-tokens. */
+     uitgelijnd zijn; het frame komt uit de gedeelde --mfd-tokens. */
   body > div:nth-of-type(2) > div:nth-of-type(4) {
     position: absolute;
-    top: 12rem;
+    top: 8rem;
     left: 1rem;
-    width: 8rem;
-    height: 8rem;
+    width: 12rem;
+    height: 12rem;
     border: 1px solid #06080a;
     border-radius: 0.9rem;
-    background:
-      var(--mfd-knoppen-rij),
-      var(--mfd-knoppen-rij),
-      var(--mfd-knoppen-kolom),
-      var(--mfd-knoppen-kolom);
     background-color: var(--mfd-frame);
-    background-size:
-      calc(100% - 3rem) 0.4rem,
-      calc(100% - 3rem) 0.4rem,
-      0.4rem calc(100% - 3rem),
-      0.4rem calc(100% - 3rem);
-    background-position:
-      top 0.4rem center,
-      bottom 0.4rem center,
-      left 0.4rem center,
-      right 0.4rem center;
-    background-repeat: no-repeat;
     display: grid;
     place-items: center;
     overflow: hidden;
     pointer-events: none;
   }
 
+  /* MARK: CUBE SCHERM */
   /* Blauwgrijs MFD-scherm binnen de bezel waar de kubus op draait. */
   body > div:nth-of-type(2) > div:nth-of-type(4)::before {
     content: "";
@@ -42,6 +32,7 @@
     box-shadow: inset 0 0 0.6rem #00000088;
   }
 
+  /* MARK: CUBE */
   /* cube zelf verborgen tot toggle aan is; scale houdt de draaiende kubus
      (diagonaal ~1.75x de zijde) binnen het schermvlak van de bezel. */
   body > div:nth-of-type(2) > div:nth-of-type(4) > div {
@@ -50,7 +41,7 @@
     position: relative;
     transform-style: preserve-3d;
     animation: cube-spin 4s linear infinite;
-    scale: 0.55;
+    scale: 0.9;
     opacity: 0;
     transition: opacity 0.25s ease;
   }
@@ -69,13 +60,22 @@
   body > div:nth-of-type(2) > div:nth-of-type(4) > div > div:nth-of-type(5) { transform: rotateX(90deg) translateZ(2.25rem); }
   body > div:nth-of-type(2) > div:nth-of-type(4) > div > div:nth-of-type(6) { transform: rotateX(-90deg) translateZ(2.25rem); }
 
-  /* toggle: toon de kubus binnenin */
+  /* MARK: CUBE TOGGLE & SPEED */
+  /* toggle: toon de kubus binnenin (cube-switch, zie style.css) */
   body:has(> div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(1) > input:checked)
     > div:nth-of-type(2) > div:nth-of-type(4) > div {
     opacity: 1;
   }
+
+  /* s-knop: cube-box draait sneller mee (zie --fast in style.css). */
+  @container style(--fast:true) {
+    body > div:nth-of-type(2) > div:nth-of-type(4) > div {
+      animation-duration: 1.2s;
+    }
+  }
 }
 
+/* MARK: ANIMATIE — CUBE */
 @keyframes cube-spin {
   to { transform: rotateX(360deg) rotateY(360deg); }
 }
