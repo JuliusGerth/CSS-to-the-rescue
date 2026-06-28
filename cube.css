@@ -12,23 +12,7 @@
     height: 10rem;
     border: 1px solid #06080a;
     border-radius: 0.9rem;
-    background:
-      var(--mfd-knoppen-rij),
-      var(--mfd-knoppen-rij),
-      var(--mfd-knoppen-kolom),
-      var(--mfd-knoppen-kolom);
     background-color: var(--mfd-frame);
-    background-size:
-      calc(100% - 3rem) 0.4rem,
-      calc(100% - 3rem) 0.4rem,
-      0.4rem calc(100% - 3rem),
-      0.4rem calc(100% - 3rem);
-    background-position:
-      top 0.4rem center,
-      bottom 0.4rem center,
-      left 0.4rem center,
-      right 0.4rem center;
-    background-repeat: no-repeat;
     display: grid;
     place-items: center;
     overflow: hidden;

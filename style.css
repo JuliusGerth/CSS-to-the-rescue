@@ -36,28 +36,15 @@
 
   --color-switch-bg: #7e7c7a;
 
-  /* Gedeelde MFD-housing voor cube-box en radar: frame, scherm en knopjes. */
+  /* MARK: MFD */
+  /* Gedeelde MFD-housing voor cube-box en radar: frame en scherm. */
   --mfd-frame: #17191c;
   --mfd-scherm: linear-gradient(#22303c, #101a22);
-  --mfd-knoppen-rij: repeating-linear-gradient(
-    to right,
-    #62686e 0 0.4rem,
-    transparent 0.4rem 0.75rem
-  );
-  --mfd-knoppen-kolom: repeating-linear-gradient(
-    to bottom,
-    #62686e 0 0.4rem,
-    transparent 0.4rem 0.75rem
-  );
 
-  /* Vaste MFD-housing als één achtergrond-stack: ingekaderd scherm, vier
-     knoppenstrips en de frame-kleur. De radar zet hier alleen zijn gradients voor. */
+  /* Vaste MFD-housing als één achtergrond-stack: ingekaderd scherm en de
+     frame-kleur. De radar zet hier alleen zijn gradients voor. */
   --mfd-housing:
     var(--mfd-scherm) center / calc(100% - 2.4rem) calc(100% - 2.4rem) no-repeat,
-    var(--mfd-knoppen-rij) top 0.4rem center / calc(100% - 3rem) 0.4rem no-repeat,
-    var(--mfd-knoppen-rij) bottom 0.4rem center / calc(100% - 3rem) 0.4rem no-repeat,
-    var(--mfd-knoppen-kolom) left 0.4rem center / 0.4rem calc(100% - 3rem) no-repeat,
-    var(--mfd-knoppen-kolom) right 0.4rem center / 0.4rem calc(100% - 3rem) no-repeat,
     var(--mfd-frame);
 }
 
