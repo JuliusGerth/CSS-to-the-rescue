@@ -207,6 +207,7 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
 
 **::before en ::after**
 https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::before
+https://developer.mozilla.org/en-US/docs/Web/CSS/content (content eigenschap, gebruikt voor de OFF/ON/NRM tekst in het statusscherm)
 
 **gradients**
 https://www.youtube.com/watch?v=cWgb42tUYPA
@@ -214,6 +215,8 @@ https://www.youtube.com/watch?v=XMEX9_HvW2k&t=2s
 https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/conic-gradient
 https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/radial-gradient
 https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/repeating-radial-gradient
+https://css-tricks.com/almanac/functions/c/conic-gradient/ (conic-gradient uitleg, gebruikt voor de radar-sweep)
+https://codepen.io/xdknight/pen/BaQJQQd (vergelijkbare conic-gradient radar om de gelaagde backgrounds mee te vergelijken)
 
 **radar animatie**
 gevraagd aan claude waarom hij eerst niet de juiste richting op spinde gaat over de radar animatie die spinde eerst via de onderkant
@@ -227,6 +230,8 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
 **:has() selector**
 https://developer.mozilla.org/en-US/docs/Web/CSS/:has
 https://www.joshwcomeau.com/css/has/
+https://css-tricks.com/a-complete-state-machine-made-with-html-checkboxes-and-css/ (mijn knoppen/switches werken samen als een statemachine)
+https://css-tricks.com/the-checkbox-hack/ (basis onder de input:checked + label knoppen)
 
 **:not() selector**
 https://developer.mozilla.org/en-US/docs/Web/CSS/:not
@@ -234,15 +239,21 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/:not
 **container style queries**
 https://ishadeed.com/article/css-container-style-queries/
 https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_size_and_style_queries
+https://ishadeed.com/article/css-container-query-guide/ (interactieve gids over container queries)
 
 **CSS custom properties (variabelen)**
 https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
 
 **@property**
 https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property
+https://css-tricks.com/exploring-property-and-its-animating-powers/ (animeren van o.a. de conic-gradient hoek = mijn radar)
+https://www.smashingmagazine.com/2024/05/times-need-custom-property-instead-css-variable/ (waarom syntax/initial-value nodig zijn om te kunnen animeren)
+https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Properties_and_values_API/Registering_properties
 
 **clamp() / responsive typography**
 https://developer.mozilla.org/en-US/docs/Web/CSS/clamp
+https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/ (de wiskunde achter vloeiend schalen, voor mijn font-size: max(min(...)) truc)
+https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
 
 **aspect-ratio**
 https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
@@ -250,6 +261,9 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
 **3D transforms**
 https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Transforms/Using
 https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/perspective
+https://3dtransforms.desandro.com/cube (zelfde 6-vlakken kubus als die van mij: rotateY/rotateX + translateZ)
+https://3dtransforms.desandro.com/perspective (waarom de perspective op body het effect bepaalt)
+https://css-tricks.com/how-css-perspective-works/ (visuele uitleg, ook voor de gekantelde zijpanelen)
 
 **@keyframes / steps()**
 https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@keyframes
