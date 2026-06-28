@@ -35,7 +35,6 @@
   --color-keypad-button-bg: #6f6f6f;
 
   --color-switch-bg: #7e7c7a;
-  --color-switch-stick-bg: #888;
 
   /* Gedeelde MFD-housing voor cube-box en radar: frame, scherm en knopjes. */
   --mfd-frame: #17191c;
@@ -349,8 +348,6 @@ body > div:nth-of-type(2) > div:nth-of-type(5) {
 
 /* Gedeelde transition voor alle knoppen in de button box. */
 body > div:nth-of-type(2) > div:first-of-type > label,
-body > div:nth-of-type(2) > div:first-of-type > button,
-body > div:nth-of-type(2) > div:nth-of-type(2) > button,
 body > div:nth-of-type(2) > div:nth-of-type(2) > label {
   transition: background 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
 }
@@ -381,19 +378,6 @@ body > div:nth-of-type(2) > div:first-of-type > label input {
   display: none;
 }
 
-body > div:nth-of-type(2) > div:first-of-type > button {
-  width: 2.5rem;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 1px solid transparent;
-  background: var(--color-top-button-bg);
-  color: var(--color-top-button-text);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 /* 9 BUTTONS */
 body > div:nth-of-type(2) > div:nth-of-type(2) {
   display: grid;
@@ -404,15 +388,11 @@ body > div:nth-of-type(2) > div:nth-of-type(2) {
   margin-inline: auto;
 }
 
-body > div:nth-of-type(2) > div:nth-of-type(2) > button,
 body > div:nth-of-type(2) > div:nth-of-type(2) > label {
   background: var(--color-keypad-button-bg);
   width: 3.6rem;
   height: 3.6rem;
   border: 1px solid transparent;
-}
-
-body > div:nth-of-type(2) > div:nth-of-type(2) > label {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -424,9 +404,7 @@ body > div:nth-of-type(2) > div:nth-of-type(2) > label > input {
 }
 
 /* klik feedback */
-body > div:nth-of-type(2) > div:first-of-type > button:active,
 body > div:nth-of-type(2) > div:first-of-type > label:active,
-body > div:nth-of-type(2) > div:nth-of-type(2) > button:active,
 body > div:nth-of-type(2) > div:nth-of-type(2) > label:active {
   transform: scale(0.91);
   background: #505050;
@@ -441,7 +419,7 @@ body
   box-shadow: 0 0 8px var(--color-screen-glow);
 }
 
-/* ingeschakeld state voor knop 2 en 3 */
+/* ingeschakeld state: elke toets licht oranje op als hij aanstaat */
 body > div:nth-of-type(2) > div:nth-of-type(2) > label:has(input:checked) {
   background: #7a4800;
   border-color: #ff880066;
@@ -452,7 +430,7 @@ body > div:nth-of-type(2) > div:nth-of-type(2) > label:has(input:checked) {
 /* Elke ingedrukte cijfertoets toont zijn cijfer groot op het hoofdscherm
    (alleen zichtbaar als de Power-switch aanstaat). */
 body > div:first-of-type > div > div::after {
-  content: "";
+  content: var(--keypress, "");
   position: absolute;
   inset: 0;
   display: grid;
@@ -461,15 +439,8 @@ body > div:first-of-type > div > div::after {
   font-size: 4rem;
 }
 
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(1):active) body > div:first-of-type > div > div::after { content: "1"; }
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(1):active)  body > div:first-of-type > div > div::after { content: "2"; }
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2):active)  body > div:first-of-type > div > div::after { content: "3"; }
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(2):active) body > div:first-of-type > div > div::after { content: "4"; }
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(3):active) body > div:first-of-type > div > div::after { content: "5"; }
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(4):active) body > div:first-of-type > div > div::after { content: "6"; }
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(5):active) body > div:first-of-type > div > div::after { content: "7"; }
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(6):active) body > div:first-of-type > div > div::after { content: "8"; }
-html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(7):active) body > div:first-of-type > div > div::after { content: "9"; }
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(2) > input:checked) { --keypress: "2"; }
+html:has(body > div:nth-of-type(2) > div:nth-of-type(2) > label:nth-of-type(3) > input:checked) { --keypress: "3"; }
 
 /* MARK: SWITCHES */
 /* https://www.w3schools.com/howto/howto_css_switch.asp */
@@ -562,8 +533,6 @@ body > div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(3) {
   }
 
   body > div:nth-of-type(2) > div:first-of-type > label,
-  body > div:nth-of-type(2) > div:first-of-type > button,
-  body > div:nth-of-type(2) > div:nth-of-type(2) > button,
   body > div:nth-of-type(2) > div:nth-of-type(2) > label {
     color: #8dff9c;
     border-color: #8dff9c66;
@@ -617,13 +586,13 @@ html:has(
     body
       > div:nth-of-type(2)
       > div:nth-of-type(2)
-      > label:nth-of-type(1)
+      > label:nth-of-type(2)
       > input:checked
   ):has(
     body
       > div:nth-of-type(2)
       > div:nth-of-type(2)
-      > label:nth-of-type(2)
+      > label:nth-of-type(3)
       > input:checked
   )
   body {
@@ -635,13 +604,13 @@ html:has(
     body
       > div:nth-of-type(2)
       > div:nth-of-type(2)
-      > label:nth-of-type(1)
+      > label:nth-of-type(2)
       > input:checked
   ):has(
     body
       > div:nth-of-type(2)
       > div:nth-of-type(2)
-      > label:nth-of-type(2)
+      > label:nth-of-type(3)
       > input:checked
   )
   body
@@ -658,13 +627,13 @@ html:has(
     body
       > div:nth-of-type(2)
       > div:nth-of-type(2)
-      > label:nth-of-type(1)
+      > label:nth-of-type(2)
       > input:checked
   ):has(
     body
       > div:nth-of-type(2)
       > div:nth-of-type(2)
-      > label:nth-of-type(2)
+      > label:nth-of-type(3)
       > input:checked
   )
   body
@@ -672,34 +641,18 @@ html:has(
   background-color: #1a0000;
 }
 
-/* Rode gloed op alle knoppen in emergency mode. */
+/* Rode gloed op alle keypad-toetsen in emergency mode. */
 html:has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(1)
-      > input:checked
-  ):has(
     body
       > div:nth-of-type(2)
       > div:nth-of-type(2)
       > label:nth-of-type(2)
       > input:checked
-  )
-  body
-  > div:nth-of-type(2)
-  button,
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:nth-of-type(2)
-      > label:nth-of-type(1)
-      > input:checked
   ):has(
     body
       > div:nth-of-type(2)
       > div:nth-of-type(2)
-      > label:nth-of-type(2)
+      > label:nth-of-type(3)
       > input:checked
   )
   body
@@ -715,13 +668,13 @@ html:has(
     body
       > div:nth-of-type(2)
       > div:nth-of-type(2)
-      > label:nth-of-type(1)
+      > label:nth-of-type(2)
       > input:checked
   ):has(
     body
       > div:nth-of-type(2)
       > div:nth-of-type(2)
-      > label:nth-of-type(2)
+      > label:nth-of-type(3)
       > input:checked
   )
   /* Vijf vuurvlammen onderaan het scherm via body::after en de fire SVG. */
@@ -751,14 +704,10 @@ html:has(
 }
 
 /* MARK: RESPONSIVE */
-/* Alle maten staan in rem; vanaf pc-formaat groeit de rem-basis mee met de
-   viewportbreedte zodat het hele paneel proportioneel opschaalt en op elke
-   schermbreedte dezelfde verhoudingen houdt.
-   100vw / 90 = 16px op een 1440px scherm, ~28px op een 2560px scherm;
-   max() voorkomt dat het tussen 1024px en 1440px kleiner wordt dan 16px. */
-@media (min-width: 1024px) {
+
+@media (min-width: 768px) {
   html {
-    font-size: max(1rem, calc(100vw / 90));
+    font-size: max(12px, min(100vw / 90, 100vh / 48));
   }
 }
 
@@ -774,12 +723,10 @@ html:has(
     gap: 1rem;
   }
 
-  body > div:nth-of-type(2) > div:first-of-type > label,
-  body > div:nth-of-type(2) > div:first-of-type > button {
+  body > div:nth-of-type(2) > div:first-of-type > label {
     width: 3rem;
   }
 
-  body > div:nth-of-type(2) > div:nth-of-type(2) > button,
   body > div:nth-of-type(2) > div:nth-of-type(2) > label {
     width: 3rem;
     height: 3rem;
@@ -804,8 +751,8 @@ html:has(
     content: "";
     position: absolute;
     top: 5rem;
-    width: 8rem;
-    height: 8rem;
+    width: 10rem;
+    height: 10rem;
     border: 1px solid #06080a;
     border-radius: 0.9rem;
     pointer-events: none;
@@ -824,7 +771,10 @@ html:has(
      het binnenste schermvlak geschaald zodat de bezel vrij blijft. */
   body > div:nth-of-type(2)::after {
     top: 12rem;
-    right: 1rem;
+    /* Vanuit het midden gepositioneerd zodat de radar dicht bij de knoppen
+       blijft op tablet (volle breedte). Op desktop teruggezet naar right:1rem. */
+    left: calc(50% + 12rem);
+    right: auto;
     opacity: 1;
     background:
       radial-gradient(
@@ -1072,14 +1022,15 @@ html:has(
   }
 
   body > div:nth-of-type(2)::after {
+    left: auto;
     right: 1rem;
   }
 
   body > div:nth-of-type(2) {
     width: 60vw;
     flex: 1;
-    padding-left: 9rem;
-    padding-right: 9rem;
+    padding-left: 11rem;
+    padding-right: 11rem;
     perspective: 56.25rem;
     transform-style: preserve-3d;
   }
@@ -1193,17 +1144,6 @@ html:has(
 }
 
 /* l: keypadverlichting — alle toetsen krijgen groene backlight. */
-html:has(
-    body
-      > div:nth-of-type(2)
-      > div:first-of-type
-      > label:nth-of-type(5)
-      > input[type="checkbox"]:checked
-  )
-  body
-  > div:nth-of-type(2)
-  > div:nth-of-type(2)
-  > button,
 html:has(
     body
       > div:nth-of-type(2)
@@ -1366,18 +1306,6 @@ html:has(
   }
   to {
     background-color: #110000;
-  }
-}
-
-/* Rode gloed pulseert van intens naar zwak (momenteel niet in gebruik). */
-@keyframes emergency-glow {
-  from {
-    box-shadow:
-      0 0 25px #ff0000,
-      0 0 60px #ff000066;
-  }
-  to {
-    box-shadow: 0 0 6px #ff3333;
   }
 }
 

@@ -4,9 +4,12 @@
   body > div:nth-of-type(2) > div:nth-of-type(4) {
     position: absolute;
     top: 12rem;
-    left: 1rem;
-    width: 8rem;
-    height: 8rem;
+    /* Vanuit het midden gepositioneerd zodat de cube-MFD dicht bij de knoppen
+       blijft op tablet (volle breedte). Op desktop teruggezet naar left:1rem. */
+    left: auto;
+    right: calc(50% + 12rem);
+    width: 10rem;
+    height: 10rem;
     border: 1px solid #06080a;
     border-radius: 0.9rem;
     background:
@@ -50,7 +53,7 @@
     position: relative;
     transform-style: preserve-3d;
     animation: cube-spin 4s linear infinite;
-    scale: 0.55;
+    scale: 0.7;
     opacity: 0;
     transition: opacity 0.25s ease;
   }
@@ -73,6 +76,15 @@
   body:has(> div:nth-of-type(2) > div:nth-of-type(3) > label:nth-of-type(1) > input:checked)
     > div:nth-of-type(2) > div:nth-of-type(4) > div {
     opacity: 1;
+  }
+}
+
+/* Desktop: button box is 60vw met zijpadding, dus de MFD hoort weer tegen de
+   (binnen)rand i.p.v. vanuit het midden. */
+@media (min-width: 1024px) {
+  body > div:nth-of-type(2) > div:nth-of-type(4) {
+    left: 1rem;
+    right: auto;
   }
 }
 
